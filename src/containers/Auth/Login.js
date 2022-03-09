@@ -3,14 +3,10 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 
 import * as actions from "../../store/actions";
-// import { KeyCodeUtils, LanguageUtils } from "../utils";
-
-// import userIcon from "../../src/assets/images/user.svg";
-// import passIcon from "../../src/assets/images/pass.svg";
 import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 
-// import adminService from "../services/adminService";
+import { handleLoginApi } from "../../services/userService";
 
 class Login extends Component {
   constructor(props) {
@@ -19,6 +15,7 @@ class Login extends Component {
       username: "",
       password: "",
       isShowPassword: false,
+      errorMessage: "",
     };
   }
   handleChange = (e) => {
@@ -28,9 +25,36 @@ class Login extends Component {
     });
     // console.log(this.state);
   };
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     console.log(this.state);
+    this.setState({
+      errorMessage: "",
+    });
+    try {
+      let result = await handleLoginApi(
+        this.state.username,
+        this.state.password
+      );
+      if (result && result.errCode !== 0) {
+        this.setState({
+          errorMessage: result.message,
+        });
+      }
+      if (result && result.errCode === 0) {
+        this.props.userLoginSuccess(result.user);
+        console.log("Login success");
+      }
+      console.log(result);
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data) {
+          this.setState({
+            errorMessage: error.response.data.message,
+          });
+        }
+      }
+    }
   };
   handleChangeTypePassword = () => {
     this.setState({
@@ -76,6 +100,9 @@ class Login extends Component {
                 onClick={() => this.handleChangeTypePassword()}
               ></i>
             </div>
+            <div className="col-12 form-group text-danger">
+              {this.state.errorMessage}
+            </div>
             <div className="col-12 form-group">
               <button
                 type="submit"
@@ -117,9 +144,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     navigate: (path) => dispatch(push(path)),
-    adminLoginSuccess: (adminInfo) =>
-      dispatch(actions.adminLoginSuccess(adminInfo)),
-    adminLoginFail: () => dispatch(actions.adminLoginFail()),
+
+    // userLoginFail: () => dispatch(actions.userLoginFail()),
+    userLoginSuccess: (userInfo) =>
+      dispatch(actions.userLoginSuccess(userInfo)),
   };
 };
 
