@@ -1,17 +1,22 @@
-import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
+import { Component } from "react";
 import { connect } from "react-redux";
+import { getAllUsers, createNewUserService } from "../../services/userService";
+import ModalUser from "./ModalUser";
 import "./UserManage.scss";
-import { getAllUsers } from "../../services/userService";
 class UserManage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrUsers: [],
+      isShowModal: false,
     };
   }
 
   async componentDidMount() {
+    await this.getAllUsersFromReact();
+  }
+
+  async getAllUsersFromReact() {
     try {
       let response = await getAllUsers("ALL");
       if (response && response.errCode === 0) {
@@ -25,12 +30,44 @@ class UserManage extends Component {
       console.log(error);
     }
   }
-
+  handleAddNewUser = () => {
+    this.setState({
+      isShowModal: true,
+    });
+  };
+  toggleModal = () => {
+    this.setState({
+      isShowModal: !this.state.isShowModal,
+    });
+  };
+  createNewUser = async (data) => {
+    try {
+      let response = await createNewUserService(data);
+      if (response && response.errCode !== 0) {
+        alert(response.errMessage);
+      } else {
+        await this.getAllUsersFromReact();
+        this.setState({
+          isShowModal: false,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   render() {
     console.log("Check render", this.state);
     return (
       <div class="container">
         <h2 className="text-center">Manager user</h2>
+        <div className="my-2">
+          <button
+            className="btn btn-primary px-2 rounded"
+            onClick={() => this.handleAddNewUser()}
+          >
+            <i className="fas fa-plus"></i> Thêm mới
+          </button>
+        </div>
         <table class="table table-dark table-hover">
           <thead>
             <tr>
@@ -45,7 +82,7 @@ class UserManage extends Component {
             {this.state.arrUsers &&
               this.state.arrUsers.map((item, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td>{item.email}</td>
                     <td>{item.firstName}</td>
                     <td>{item.lastName}</td>
@@ -59,6 +96,11 @@ class UserManage extends Component {
               })}
           </tbody>
         </table>
+        <ModalUser
+          isShowModel={this.state.isShowModal}
+          toggleModal={this.toggleModal}
+          createNewUser={this.createNewUser}
+        />
       </div>
     );
   }
