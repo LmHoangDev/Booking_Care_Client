@@ -1,7 +1,12 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { getAllUsers, createNewUserService } from "../../services/userService";
+import {
+  getAllUsers,
+  createNewUserService,
+  deleteUserService,
+} from "../../services/userService";
 import ModalUser from "./ModalUser";
+import { emitter } from "../../utils/emitter";
 import "./UserManage.scss";
 class UserManage extends Component {
   constructor(props) {
@@ -50,9 +55,22 @@ class UserManage extends Component {
         this.setState({
           isShowModal: false,
         });
+        emitter.emit("EVENT_CLEAR_MODEL_DATA");
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+  deleteUser = async (data) => {
+    try {
+      let res = await deleteUserService(data.id);
+      if (res && res.errCode === 0) {
+        await this.getAllUsersFromReact();
+      } else {
+        alert(res.errMessage);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
   render() {
@@ -88,8 +106,13 @@ class UserManage extends Component {
                     <td>{item.lastName}</td>
                     <td>{item.address}</td>
                     <td>
-                      <button className="btn btn-primary mr-1">edit</button>
-                      <button className="btn btn-danger ml-2">delete</button>
+                      <button className="btn btn-primary mr-1">Edit</button>
+                      <button
+                        className="btn btn-danger ml-2"
+                        onClick={() => this.deleteUser(item)}
+                      >
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 );
