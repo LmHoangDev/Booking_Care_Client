@@ -4,8 +4,10 @@ import {
   getAllUsers,
   createNewUserService,
   deleteUserService,
+  updateUserService,
 } from "../../services/userService";
 import ModalUser from "./ModalUser";
+import ModalEditUser from "./ModalEditUser";
 import { emitter } from "../../utils/emitter";
 import "./UserManage.scss";
 class UserManage extends Component {
@@ -14,6 +16,8 @@ class UserManage extends Component {
     this.state = {
       arrUsers: [],
       isShowModal: false,
+      isShowModalEdit: false,
+      userEdit: {},
     };
   }
 
@@ -45,6 +49,11 @@ class UserManage extends Component {
       isShowModal: !this.state.isShowModal,
     });
   };
+  toggleModalEdit = () => {
+    this.setState({
+      isShowModalEdit: !this.state.isShowModalEdit,
+    });
+  };
   createNewUser = async (data) => {
     try {
       let response = await createNewUserService(data);
@@ -71,6 +80,28 @@ class UserManage extends Component {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+  editUser = (item) => {
+    this.setState({
+      isShowModalEdit: true,
+      userEdit: item,
+    });
+  };
+  doEditUser = async (data) => {
+    try {
+      let res = await updateUserService(data);
+      console.log(res.message);
+      if (res && res.message.errCode === 0) {
+        this.setState({
+          ...this.state,
+          isShowModalEdit: false,
+        });
+
+        await this.getAllUsersFromReact();
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
   render() {
@@ -106,7 +137,12 @@ class UserManage extends Component {
                     <td>{item.lastName}</td>
                     <td>{item.address}</td>
                     <td>
-                      <button className="btn btn-primary mr-1">Edit</button>
+                      <button
+                        className="btn btn-primary mr-1"
+                        onClick={() => this.editUser(item)}
+                      >
+                        Edit
+                      </button>
                       <button
                         className="btn btn-danger ml-2"
                         onClick={() => this.deleteUser(item)}
@@ -124,6 +160,14 @@ class UserManage extends Component {
           toggleModal={this.toggleModal}
           createNewUser={this.createNewUser}
         />
+        {this.state.isShowModalEdit && (
+          <ModalEditUser
+            isShowModelEdit={this.state.isShowModalEdit}
+            editEditUser={this.doEditUser}
+            toggleModalEdit={this.toggleModalEdit}
+            currentUser={this.state.userEdit}
+          />
+        )}
       </div>
     );
   }
