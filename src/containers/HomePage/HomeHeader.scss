@@ -1,0 +1,48 @@
+.header-home-page {
+    min-height: 100px;
+    font-family: "Montserrat", sans-serif;
+    margin: 20px 0;
+    .container {
+        .header-left {
+            background: url("../../assets/images/bookingcare-2020.svg") no-repeat center;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            font-size: 24px;
+            a {
+                margin-left: 20px;
+                color: #969495;
+            }
+        }
+        .header-center {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            a {
+                color: #000;
+                text-decoration: none;
+            }
+            a.detail {
+                color: #969495;
+            }
+        }
+        .header-right {
+            a {
+                color: #000;
+                text-decoration: none;
+                i {
+                    color: #45c3d2;
+                }
+            }
+            a.detail {
+                color: #969495;
+                span {
+                    font-weight: bold;
+                }
+            }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
