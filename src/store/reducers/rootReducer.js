@@ -17,7 +17,7 @@ const persistCommonConfig = {
 const userPersistConfig = {
   ...persistCommonConfig,
   key: "key",
-  whitelist: ["isLoggedIn", "userInfo"],
+  whitelist: ["isLoggedIn", "userInfo", "language"],
 };
 
 export default (history) =>

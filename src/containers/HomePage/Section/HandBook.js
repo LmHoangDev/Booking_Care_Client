@@ -21,7 +21,7 @@ class HandBook extends Component {
     };
     return (
       <>
-        <div className="section-container">
+        <div className="section-container section-handbook">
           <div className="container py-4">
             <div className="section-title d-flex">
               <h1>Cẩm nang</h1>

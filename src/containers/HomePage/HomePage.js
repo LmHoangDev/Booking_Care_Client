@@ -6,6 +6,8 @@ import Specialty from "./Section/Specialty";
 import "./HomePage.scss";
 import OutStandingDoctor from "./Section/OutStandingDoctor";
 import HandBook from "./Section/HandBook";
+import About from "./Section/About";
+import HomeFooter from "./HomeFooter";
 class HomePage extends Component {
   render() {
     return (
@@ -15,6 +17,8 @@ class HomePage extends Component {
         <MedicalFacility />
         <OutStandingDoctor />
         <HandBook />
+        <About />
+        <HomeFooter />
       </>
     );
   }

@@ -4,6 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10000;
+    background: #fff;
     .container {
         .header-left {
             background: url("../../assets/images/bookingcare-2020.svg") no-repeat center;
