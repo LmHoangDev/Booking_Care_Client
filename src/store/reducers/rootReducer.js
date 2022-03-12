@@ -17,7 +17,12 @@ const persistCommonConfig = {
 const userPersistConfig = {
   ...persistCommonConfig,
   key: "key",
-  whitelist: ["isLoggedIn", "userInfo", "language"],
+  whitelist: ["isLoggedIn", "userInfo"],
+};
+const appPersistConfig = {
+  ...persistCommonConfig,
+  key: "app",
+  whitelist: ["language"],
 };
 
 export default (history) =>
@@ -26,5 +31,5 @@ export default (history) =>
 
     user: persistReducer(userPersistConfig, userReducer),
 
-    app: appReducer,
+    app: persistReducer(appPersistConfig, appReducer),
   });
