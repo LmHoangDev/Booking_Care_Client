@@ -10,13 +10,13 @@ import Slider from "react-slick";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-class Specialty extends Component {
+class HandBook extends Component {
   render() {
     let settings = {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 4,
+      slidesToShow: 2,
       slidesToScroll: 1,
     };
     return (
@@ -24,9 +24,9 @@ class Specialty extends Component {
         <div className="section-container">
           <div className="container py-4">
             <div className="section-title d-flex">
-              <h1>Chuyên khoa phổ biến</h1>
+              <h1>Cẩm nang</h1>
               <div className="see-more">
-                <a href="#">Xem thêm</a>
+                <a href="#">Tất cả bài viết</a>
               </div>
             </div>
             <Slider {...settings}>
@@ -79,4 +79,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(HandBook);

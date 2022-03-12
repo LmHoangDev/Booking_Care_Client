@@ -1,16 +1,12 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import ImgYHCT from "../../../assets/specialty/121232-y-hoc-co-truyen.jpg";
-import ImgCS from "../../../assets/specialty/121215-cot-song.jpg";
-import ImgBSGD from "../../../assets/specialty/195926-bac-si-gia-dinh.jpg";
-import ImgUB from "../../../assets/specialty/195611-ung-buou.jpg";
-import ImgTHHM from "../../../assets/specialty/200111-tao-hinh-ham-mat.jpg";
+import imgBVTN from "../../../assets/medical-facility/082317benh-vien-thanh-nhan.jpg";
 import Slider from "react-slick";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-class Specialty extends Component {
+class MedicalFacility extends Component {
   render() {
     let settings = {
       dots: false,
@@ -21,43 +17,43 @@ class Specialty extends Component {
     };
     return (
       <>
-        <div className="section-container">
+        <div className="section-container medical-facility">
           <div className="container py-4">
             <div className="section-title d-flex">
-              <h1>Chuyên khoa phổ biến</h1>
+              <h1>Cơ sở y tế nổi bật</h1>
               <div className="see-more">
-                <a href="#">Xem thêm</a>
+                <a href="#">Tìm kiếm</a>
               </div>
             </div>
             <Slider {...settings}>
               <div class="section-item">
                 <a href="#" className="d-block">
-                  <img src={ImgYHCT} alt="" />
-                  <p>Y học cổ truyền</p>
+                  <img src={imgBVTN} alt="" />
+                  <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
               <div class="section-item">
                 <a href="#" className="d-block">
-                  <img src={ImgCS} alt="" />
-                  <p>Cột sống</p>
+                  <img src={imgBVTN} alt="" />
+                  <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
               <div class="section-item">
                 <a href="#" className="d-block">
-                  <img src={ImgBSGD} alt="" />
-                  <p>Bác sĩ gia đình</p>
+                  <img src={imgBVTN} alt="" />
+                  <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
               <div class="section-item">
                 <a href="#" className="d-block">
-                  <img src={ImgUB} alt="" />
-                  <p>Ung bướu</p>
+                  <img src={imgBVTN} alt="" />
+                  <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
               <div class="section-item">
                 <a href="#" className="d-block">
-                  <img src={ImgTHHM} alt="" />
-                  <p>Tạo hình hàm mặt</p>
+                  <img src={imgBVTN} alt="" />
+                  <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
             </Slider>
@@ -79,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
