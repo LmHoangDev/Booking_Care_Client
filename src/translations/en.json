@@ -8,7 +8,8 @@
         "seclect-doctor": "Choose a good doctor",
         "fee": "Examination package",
         "check-health": "General health check",
-        "support": "Support"
+        "support": "Support",
+        "welcome": "Welcome, "
     },
     "banner": {
         "title1": "MEDICAL BACKGROUND",
@@ -61,6 +62,21 @@
             "system-parameter": {
                 "header": "System-parameter"
             }
+        },
+        "admin": {
+            "manage-user": "Users System",
+            "manage-doctor": "Manage Doctors",
+            "manage-admin": "Manage Admin",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "manage-clinic": "Manage Clinics",
+            "clinic": "Clinics",
+
+            "specialty": "Specialty",
+            "manage-specialty": "Manage Specialties",
+
+            "handbook": "Handbook",
+            "manage-handbook": "Manage Handbooks"
         }
     },
     "system": {

@@ -8,7 +8,8 @@
         "seclect-doctor": "Chọn bác sĩ giỏi",
         "fee": "Gói khám",
         "check-health": "General health check",
-        "support": "Hỗ trợ"
+        "support": "Hỗ trợ",
+        "welcome": "Xin chào, "
     },
     "banner": {
         "title1": "NỀN TẢNG Y TẾ",
@@ -61,6 +62,21 @@
             "system-parameter": {
                 "header": "Tham số hệ thống"
             }
+        },
+        "admin": {
+            "manage-user": "Người dùng",
+            "manage-doctor": "Quản lý bác sĩ",
+            "manage-admin": "Quản lý admin",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "manage-clinic": "Quản lý phòng khám",
+            "clinic": "Phòng khám",
+
+            "specialty": "Chuyên khoa",
+            "manage-specialty": "Quản lý chuyên khoa",
+
+            "handbook": "Cẩm nang",
+            "manage-handbook": "Quản lý cẩm nang"
         }
     },
     "system": {
