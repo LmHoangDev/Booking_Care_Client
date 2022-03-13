@@ -2,6 +2,7 @@ import actionTypes from "../actions/actionTypes";
 
 const initialState = {
   genders: [],
+  users: [],
   roles: [],
   positions: [],
   isLoadingGender: false,
@@ -57,6 +58,24 @@ const adminReducer = (state = initialState, action) => {
         ...state,
         isLoadingGender: false,
       };
+    case actionTypes.FETCH_ALL_USERS_START:
+      return {
+        ...state,
+        isLoadingGender: true,
+      };
+    case actionTypes.FETCH_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        isLoadingGender: false,
+        users: action.data,
+      };
+    case actionTypes.FETCH_ALL_USERS_FAILED:
+      return {
+        ...state,
+        isLoadingGender: false,
+        users: [],
+      };
+
     default:
       return state;
   }

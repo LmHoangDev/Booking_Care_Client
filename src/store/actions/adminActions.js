@@ -2,11 +2,13 @@ import actionTypes from "./actionTypes";
 import {
   getAllCodeService,
   createNewUserService,
+  getAllUsers,
+  deleteUserService,
 } from "../../services/userService";
 // export const fetchGenderStart = () => ({
 //   type: actionTypes.FETCH_GENDER_START,
 // });
-
+import { toast } from "react-toastify";
 //gender
 export const fetchGenderStart = () => {
   return async (dispatch, getState) => {
@@ -81,14 +83,16 @@ export const fetchRoleFailed = () => ({
 });
 
 //user
-
+//create
 export const fetchCreateNewUser = (data) => {
   return async (dispatch, getState) => {
     try {
       // dispatch(fetchGenderStart());
       let res = await createNewUserService(data);
       if (res && res.errCode === 0) {
-        dispatch(saveUserSuccess());
+        toast.success("Thêm mới người dùng thành công!");
+        await dispatch(saveUserSuccess());
+        await dispatch(fetchAllUsersStart());
       } else {
         dispatch(saveUserFailed());
       }
@@ -103,3 +107,61 @@ export const saveUserSuccess = () => ({
 export const saveUserFailed = () => ({
   type: actionTypes.CREATE_USER_FAILED,
 });
+//get list
+export const fetchAllUsersStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: actionTypes.FETCH_ALL_USERS_START });
+      let res = await getAllUsers("ALL");
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllUsersSuccess(res.users.reverse()));
+      } else {
+        dispatch(fetchAllUsersFailed());
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchAllUsersFailed());
+    }
+  };
+};
+export const fetchAllUsersSuccess = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+    data,
+  };
+};
+export const fetchAllUsersFailed = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_USERS_FAILED,
+    data,
+  };
+};
+//delete
+export const fetchDeleteUserStart = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await deleteUserService(data);
+      if (res && res.errCode === 0) {
+        toast.success("Xóa người dùng thành công!");
+        dispatch(fetchAllUsersStart());
+        dispatch(fetchDeleteUserSuccess());
+      } else {
+        toast.error("Xóa người dùng thất bại!");
+        dispatch(fetchDeleteUserFailed());
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Xóa người dùng thất bại!");
+    }
+  };
+};
+export const fetchDeleteUserSuccess = () => {
+  return {
+    type: actionTypes.DELETE_USER_SUCCESS,
+  };
+};
+export const fetchDeleteUserFailed = () => {
+  return {
+    type: actionTypes.FETCH_ALL_USERS_FAILED,
+  };
+};

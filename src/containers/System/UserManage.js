@@ -107,7 +107,7 @@ class UserManage extends Component {
   render() {
     console.log("Check render", this.state);
     return (
-      <div class="container">
+      <div className="container">
         <h2 className="text-center">Manager user</h2>
         <div className="my-2">
           <button

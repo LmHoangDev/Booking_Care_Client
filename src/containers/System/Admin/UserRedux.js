@@ -7,6 +7,7 @@ import * as actions from "../../../store/actions";
 import "./UserRedux.scss";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import TableManageUser from "./TableManageUser";
 // import { fetchGenderStart } from "../../../store/actions";
 class UserRedux extends Component {
   constructor(props) {
@@ -57,6 +58,20 @@ class UserRedux extends Component {
       this.setState({
         roleArr: arrRoles,
         role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
+      });
+    }
+    if (prevProps.listUsers !== this.props.listUsers) {
+      this.setState({
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        gender: "",
+        position: "",
+        image: "",
+        address: "",
+        phoneNumber: "",
+        role: "",
       });
     }
   }
@@ -120,6 +135,7 @@ class UserRedux extends Component {
       address: this.state.address,
       gender: this.state.gender,
     });
+    this.props.fetchAllUsersRedux();
     console.log("data can them", this.state);
   };
   render() {
@@ -340,6 +356,8 @@ class UserRedux extends Component {
             <FormattedMessage id="manage-user.save" />
           </button>
         </form>
+
+        <TableManageUser />
       </div>
     );
   }
@@ -352,6 +370,7 @@ const mapStateToProps = (state) => {
     positionsRedux: state.admin.positions,
     rolesRedux: state.admin.roles,
     isLoadingGender: state.admin.isLoadingGender,
+    listUsers: state.admin.users,
   };
 };
 
@@ -361,6 +380,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllPositionsRedux: () => dispatch(actions.fetchPositionStart()),
     getAllRolesRedux: () => dispatch(actions.fetchRoleStart()),
     createNewUser: (data) => dispatch(actions.fetchCreateNewUser(data)),
+    fetchAllUsersRedux: () => dispatch(actions.fetchAllUsersStart()),
   };
 };
 
