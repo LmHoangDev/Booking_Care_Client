@@ -17,6 +17,17 @@ class UserRedux extends Component {
       roleArr: [],
       previewURL: "",
       isOpen: "",
+
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      gender: "",
+      position: "",
+      image: "",
+      address: "",
+      phoneNumber: "",
+      role: "",
     };
   }
   componentDidMount() {
@@ -27,18 +38,25 @@ class UserRedux extends Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     // state redux change thì ms setstate
     if (prevProps.gendersRedux !== this.props.gendersRedux) {
+      let arrGenders = this.props.gendersRedux;
       this.setState({
-        genderArr: this.props.gendersRedux,
+        genderArr: arrGenders,
+        gender: arrGenders && arrGenders.length > 0 ? arrGenders[0].key : "",
       });
     }
     if (prevProps.positionsRedux !== this.props.positionsRedux) {
+      let arrPositions = this.props.positionsRedux;
       this.setState({
-        positionArr: this.props.positionsRedux,
+        positionArr: arrPositions,
+        position:
+          arrPositions && arrPositions.length > 0 ? arrPositions[0].key : "",
       });
     }
     if (prevProps.rolesRedux !== this.props.rolesRedux) {
+      let arrRoles = this.props.rolesRedux;
       this.setState({
-        roleArr: this.props.rolesRedux,
+        roleArr: arrRoles,
+        role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
       });
     }
   }
@@ -49,6 +67,7 @@ class UserRedux extends Component {
       let objectURL = URL.createObjectURL(file);
       this.setState({
         previewURL: objectURL,
+        image: file,
       });
     }
   };
@@ -59,17 +78,76 @@ class UserRedux extends Component {
     });
   };
 
+  checkValidateInput = () => {
+    let isvalid = true;
+    let arrInput = [
+      "email",
+      "password",
+      "firstName",
+      "lastName",
+      "phoneNumber",
+      "address",
+    ];
+    for (let i = 0; i < arrInput.length; i++) {
+      if (!this.state[arrInput[i]]) {
+        isvalid = false;
+        alert("Missing is required " + arrInput[i]);
+        break;
+      }
+    }
+    return isvalid;
+  };
+
+  handleChangeInput = (e, id) => {
+    let copyState = { ...this.state };
+    copyState[id] = e.target.value;
+    this.setState({
+      ...copyState,
+    });
+  };
+  handleSaveUser = (e) => {
+    e.preventDefault();
+    let isValid = this.checkValidateInput();
+    if (!isValid) return;
+    this.props.createNewUser({
+      email: this.state.email,
+      password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      phoneNumber: this.state.phoneNumber,
+      roleId: this.state.role,
+      positionId: this.state.position,
+      address: this.state.address,
+      gender: this.state.gender,
+    });
+    console.log("data can them", this.state);
+  };
   render() {
     let genders = this.state.genderArr;
     let positions = this.state.positionArr;
     let roles = this.state.roleArr;
 
     let { language, isLoadingGender } = this.props;
+
+    let {
+      email,
+      password,
+      firstName,
+      lastName,
+      gender,
+      position,
+      image,
+      address,
+      phoneNumber,
+      role,
+    } = this.state;
+    // console.log("State", this.state);
+
     return (
       <div className="container">
         <div className="title">Manage users redux</div>
 
-        <form className="w-75 mx-auto">
+        <form className="w-75 mx-auto" onSubmit={(e) => this.handleSaveUser(e)}>
           <div className="row mt-4">
             <div className="form-group col-md-6">
               <label htmlFor="email">
@@ -81,6 +159,8 @@ class UserRedux extends Component {
                 id="email"
                 placeholder="Email"
                 name="email"
+                value={email}
+                onChange={(e) => this.handleChangeInput(e, "email")}
               />
             </div>
             <div className="form-group col-md-6">
@@ -93,6 +173,8 @@ class UserRedux extends Component {
                 id="password"
                 placeholder="Password"
                 name="password"
+                value={password}
+                onChange={(e) => this.handleChangeInput(e, "password")}
               />
             </div>
           </div>
@@ -107,6 +189,8 @@ class UserRedux extends Component {
                 id="firstName"
                 placeholder="First Name"
                 name="firstName"
+                value={firstName}
+                onChange={(e) => this.handleChangeInput(e, "firstName")}
               />
             </div>
             <div className="form-group col-md-4">
@@ -120,6 +204,8 @@ class UserRedux extends Component {
                 id="lastName"
                 placeholder="Last Name"
                 name="lastName"
+                value={lastName}
+                onChange={(e) => this.handleChangeInput(e, "lastName")}
               />
             </div>
             <div className="form-group col-md-4">
@@ -133,6 +219,8 @@ class UserRedux extends Component {
                 id="phoneNumber"
                 placeholder="Phone number"
                 name="phoneNumber"
+                value={phoneNumber}
+                onChange={(e) => this.handleChangeInput(e, "phoneNumber")}
               />
             </div>
           </div>
@@ -148,6 +236,8 @@ class UserRedux extends Component {
                 id="address"
                 placeholder="Address"
                 name="address"
+                value={address}
+                onChange={(e) => this.handleChangeInput(e, "address")}
               ></textarea>
             </div>
           </div>
@@ -157,7 +247,12 @@ class UserRedux extends Component {
                 {" "}
                 <FormattedMessage id="manage-user.gender" />
               </label>
-              <select className="form-control form-select" id="gender">
+              <select
+                className="form-control form-select"
+                id="gender"
+                value={gender}
+                onChange={(e) => this.handleChangeInput(e, "gender")}
+              >
                 {genders &&
                   genders.length > 0 &&
                   genders.map((item, index) => {
@@ -174,7 +269,12 @@ class UserRedux extends Component {
                 {" "}
                 <FormattedMessage id="manage-user.position" />
               </label>
-              <select className="form-control form-select" id="position">
+              <select
+                className="form-control form-select"
+                id="position"
+                value={position}
+                onChange={(e) => this.handleChangeInput(e, "position")}
+              >
                 {positions &&
                   positions.length > 0 &&
                   positions.map((item, index) => {
@@ -191,7 +291,12 @@ class UserRedux extends Component {
                 {" "}
                 <FormattedMessage id="manage-user.role" />
               </label>
-              <select className="form-control form-select" id="role">
+              <select
+                className="form-control form-select"
+                id="role"
+                value={role}
+                onChange={(e) => this.handleChangeInput(e, "role")}
+              >
                 {roles &&
                   roles.length > 0 &&
                   roles.map((item, index) => {
@@ -255,6 +360,7 @@ const mapDispatchToProps = (dispatch) => {
     getAllGendersRedux: () => dispatch(actions.fetchGenderStart()),
     getAllPositionsRedux: () => dispatch(actions.fetchPositionStart()),
     getAllRolesRedux: () => dispatch(actions.fetchRoleStart()),
+    createNewUser: (data) => dispatch(actions.fetchCreateNewUser(data)),
   };
 };
 
