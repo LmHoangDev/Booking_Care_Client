@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
 import { getAllCodeService } from "../../../services/userService";
-import { language, CRUD_ACTIONS } from "../../../utils/constant";
+import { language, CRUD_ACTIONS, CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
 import "./UserRedux.scss";
 import Lightbox from "react-image-lightbox";
@@ -81,17 +81,19 @@ class UserRedux extends Component {
         role: arrRoles && arrRoles.length > 0 ? arrRoles[0].key : "",
 
         action: CRUD_ACTIONS.CREATE,
+        previewURL: "",
       });
     }
   }
-  handleChangeImage = (e) => {
+  handleChangeImage = async (e) => {
     let data = e.target.files;
     let file = data[0];
     if (file) {
+      let base64 = await CommonUtils.getBase64(file);
       let objectURL = URL.createObjectURL(file);
       this.setState({
         previewURL: objectURL,
-        image: file,
+        image: base64,
       });
     }
   };
@@ -145,6 +147,7 @@ class UserRedux extends Component {
         positionId: this.state.position,
         address: this.state.address,
         gender: this.state.gender,
+        image: this.state.image,
       });
     }
     if (action === CRUD_ACTIONS.EDIT) {
@@ -157,11 +160,16 @@ class UserRedux extends Component {
         roleId: this.state.role,
         gender: this.state.gender,
         id: this.state.userEditId,
+        image: this.state.image,
       });
     }
   };
 
   handleEditUserFromParent = (data) => {
+    let imageBase64 = "";
+    if (data.image) {
+      imageBase64 = new Buffer(data.image, "base64").toString("binary");
+    }
     this.setState({
       email: data.email,
       password: "HashPassWord",
@@ -176,6 +184,7 @@ class UserRedux extends Component {
       role: data.roleId,
       userEditId: data.id,
       action: CRUD_ACTIONS.EDIT,
+      previewURL: imageBase64,
     });
   };
   render() {
@@ -197,7 +206,7 @@ class UserRedux extends Component {
       phoneNumber,
       role,
     } = this.state;
-    // console.log("State", this.state);
+    console.log("State", this.state);
 
     return (
       <div className="container">
@@ -406,11 +415,13 @@ class UserRedux extends Component {
                 : "btn btn-primary mt-4"
             }
           >
-            {this.state.action === CRUD_ACTIONS.EDIT ? (
-              <FormattedMessage id="manage-user.edit" />
-            ) : (
-              <FormattedMessage id="manage-user.save" />
-            )}
+            <FormattedMessage
+              id={
+                this.state.action === CRUD_ACTIONS.EDIT
+                  ? "manage-user.edit"
+                  : "manage-user.save"
+              }
+            />
           </button>
         </form>
 

@@ -96,6 +96,7 @@ export const fetchCreateNewUser = (data) => {
         await dispatch(fetchAllUsersStart());
       } else {
         dispatch(saveUserFailed());
+        toast.error("Thêm mới người dùng thất bại!");
       }
     } catch (error) {
       console.log(error);
