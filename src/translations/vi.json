@@ -171,5 +171,15 @@
         "firstName": "Tên",
         "save": "Thêm mới",
         "edit": "Cập nhật"
+    },
+    "homepage": {
+        "outstanding-doctor": "Bác sĩ nổi bật tuần qua",
+        "more-info": "Xem thêm",
+        "search": "Tìm kiếm",
+        "popular-specialty": "Chuyên khoa phổ biến",
+        "outstanding-medical-facility": "Cơ sở y tế nổi bật",
+        "handbook": "Cẩm nang",
+        "media-booking-care": "Truyền thông nói về BookingCare",
+        "all-posts": "Tất cả bài viết"
     }
 }

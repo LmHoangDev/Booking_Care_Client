@@ -24,9 +24,14 @@ class HandBook extends Component {
         <div className="section-container section-handbook">
           <div className="container py-4">
             <div className="section-title d-flex">
-              <h1>Cẩm nang</h1>
+              <h1>
+                <FormattedMessage id="homepage.handbook" />
+              </h1>
               <div className="see-more">
-                <a href="#">Tất cả bài viết</a>
+                <a href="#">
+                  {" "}
+                  <FormattedMessage id="homepage.all-posts" />
+                </a>
               </div>
             </div>
             <Slider {...settings}>

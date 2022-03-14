@@ -14,7 +14,7 @@ class Specialty extends Component {
   render() {
     let settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -24,9 +24,14 @@ class Specialty extends Component {
         <div className="section-container">
           <div className="container py-4">
             <div className="section-title d-flex">
-              <h1>Chuyên khoa phổ biến</h1>
+              <h1>
+                <FormattedMessage id="homepage.popular-specialty" />
+              </h1>
               <div className="see-more">
-                <a href="#">Xem thêm</a>
+                <a href="#">
+                  {" "}
+                  <FormattedMessage id="homepage.more-info" />
+                </a>
               </div>
             </div>
             <Slider {...settings}>

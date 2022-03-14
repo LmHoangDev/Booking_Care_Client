@@ -29,9 +29,9 @@ class OutStandingDoctor extends Component {
   render() {
     let settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: 4,
       slidesToScroll: 1,
     };
     let allDoctors = this.state.arrDoctors;
@@ -42,9 +42,14 @@ class OutStandingDoctor extends Component {
         <div className="section-container outstanding-doctor">
           <div className="container py-4">
             <div className="section-title d-flex">
-              <h1>Bác sĩ nổi bật tuần qua</h1>
+              <h1>
+                <FormattedMessage id="homepage.outstanding-doctor" />
+              </h1>
               <div className="see-more">
-                <a href="#">Tìm kiếm</a>
+                <a href="#">
+                  {" "}
+                  <FormattedMessage id="homepage.search" />
+                </a>
               </div>
             </div>
             <Slider {...settings}>

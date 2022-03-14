@@ -410,16 +410,18 @@ class UserRedux extends Component {
           <button
             type="submit"
             className={
-              this.state.action === CRUD_ACTIONS.EDIT
-                ? "btn btn-warning mt-4"
-                : "btn btn-primary mt-4"
+              this.state.action === CRUD_ACTIONS.CREATE ||
+              this.state.action === ""
+                ? "btn btn-primary mt-4"
+                : "btn btn-warning mt-4"
             }
           >
             <FormattedMessage
               id={
-                this.state.action === CRUD_ACTIONS.EDIT
-                  ? "manage-user.edit"
-                  : "manage-user.save"
+                this.state.action === CRUD_ACTIONS.CREATE ||
+                this.state.action === ""
+                  ? "manage-user.save"
+                  : "manage-user.edit"
               }
             />
           </button>

@@ -12,7 +12,7 @@
         "welcome": "Welcome, "
     },
     "banner": {
-        "title1": "MEDICAL BACKGROUND",
+        "title1": "MEDICAL PLATFORM",
         "title2": "COMPREHENSIVE HEALTH CARE",
         "search": "Find a specialist",
         "child1": "Specialized examination",
@@ -171,5 +171,15 @@
         "firstName": "First Name",
         "save": "Add new",
         "edit": "Update changes"
+    },
+    "homepage": {
+        "outstanding-doctor": "Last week's featured doctor",
+        "more-info": "See more",
+        "search": "Search",
+        "popular-specialty": "Popular specialties",
+        "outstanding-medical-facility": "Outstanding medical facility",
+        "handbook": "Handbook",
+        "media-booking-care": "Media talk about BookingCare",
+        "all-posts": "All posts"
     }
 }

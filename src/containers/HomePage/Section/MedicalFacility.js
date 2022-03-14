@@ -10,7 +10,7 @@ class MedicalFacility extends Component {
   render() {
     let settings = {
       dots: false,
-      infinite: true,
+      infinite: false,
       speed: 500,
       slidesToShow: 4,
       slidesToScroll: 1,
@@ -20,9 +20,14 @@ class MedicalFacility extends Component {
         <div className="section-container medical-facility">
           <div className="container py-4">
             <div className="section-title d-flex">
-              <h1>Cơ sở y tế nổi bật</h1>
+              <h1>
+                <FormattedMessage id="homepage.outstanding-medical-facility" />
+              </h1>
               <div className="see-more">
-                <a href="#">Tìm kiếm</a>
+                <a href="#">
+                  {" "}
+                  <FormattedMessage id="homepage.search" />
+                </a>
               </div>
             </div>
             <Slider {...settings}>
