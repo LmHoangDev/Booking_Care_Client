@@ -4,6 +4,7 @@ import {
   createNewUserService,
   getAllUsers,
   deleteUserService,
+  updateUserService,
 } from "../../services/userService";
 // export const fetchGenderStart = () => ({
 //   type: actionTypes.FETCH_GENDER_START,
@@ -163,5 +164,36 @@ export const fetchDeleteUserSuccess = () => {
 export const fetchDeleteUserFailed = () => {
   return {
     type: actionTypes.FETCH_ALL_USERS_FAILED,
+  };
+};
+// update
+
+export const fetchEditUserStart = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await updateUserService(data);
+      console.log("response :", res);
+      if (res && res.message.errCode === 0) {
+        toast.success("Cập nhật người dùng thành công!");
+        dispatch(fetchEditUserSuccess());
+        dispatch(fetchAllUsersStart());
+      } else {
+        toast.error("Cập nhật người dùng thất bại!");
+        dispatch(fetchEditUserFailed());
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật người dùng thất bại!");
+    }
+  };
+};
+export const fetchEditUserSuccess = () => {
+  return {
+    type: actionTypes.EDIT_USER_SUCCESS,
+  };
+};
+export const fetchEditUserFailed = () => {
+  return {
+    type: actionTypes.EDIT_USER_FAILED,
   };
 };

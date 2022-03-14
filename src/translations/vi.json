@@ -169,6 +169,7 @@
         "gender": "Giới tính",
         "lastName": "Họ",
         "firstName": "Tên",
-        "save": "Lưu user"
+        "save": "Thêm mới",
+        "edit": "Cập nhật"
     }
 }

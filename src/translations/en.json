@@ -169,6 +169,7 @@
         "gender": "Gender",
         "lastName": "Last Name",
         "firstName": "First Name",
-        "save": "Save user"
+        "save": "Add new",
+        "edit": "Update changes"
     }
 }
