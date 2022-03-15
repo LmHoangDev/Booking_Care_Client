@@ -110,105 +110,107 @@ class HomeHeader extends Component {
             </div>
           </div>
         </header>
-        <section className="header-home-banner">
-          <h1 className="banner-title text-center text-light py-5">
-            {" "}
-            <FormattedMessage id="banner.title1" /> <br />{" "}
-            <b>
+        {this.props.isShowBanner && (
+          <section className="header-home-banner">
+            <h1 className="banner-title text-center text-light py-5">
               {" "}
-              <FormattedMessage id="banner.title2" />
-            </b>
-          </h1>
-          <div className="banner-search text-center">
-            <i className="fa fa-search"></i>
-            <input type="text" placeholder="Search" />
-          </div>
-          <div className="banner-options">
-            <ul className="mt-5 container">
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundKCK})`,
-                  }}
-                ></div>
+              <FormattedMessage id="banner.title1" /> <br />{" "}
+              <b>
+                {" "}
+                <FormattedMessage id="banner.title2" />
+              </b>
+            </h1>
+            <div className="banner-search text-center">
+              <i className="fa fa-search"></i>
+              <input type="text" placeholder="Search" />
+            </div>
+            <div className="banner-options">
+              <ul className="mt-5 container">
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundKCK})`,
+                    }}
+                  ></div>
 
-                <a href="#">
-                  <FormattedMessage id="banner.child1" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundKTX})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child2" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundKTQ})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child3" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundDVXN})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child4" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundSKTT})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child5" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundKCK})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child6" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundGPT})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child7" />
-                </a>
-              </li>
-              <li>
-                <div
-                  style={{
-                    backgroundImage: `url(${BackGroundKTN})`,
-                  }}
-                ></div>
-                <a href="#">
-                  <FormattedMessage id="banner.child8" />
-                </a>
-              </li>
-            </ul>
-          </div>
-        </section>
+                  <a href="#">
+                    <FormattedMessage id="banner.child1" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundKTX})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child2" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundKTQ})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child3" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundDVXN})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child4" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundSKTT})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child5" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundKCK})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child6" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundGPT})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child7" />
+                  </a>
+                </li>
+                <li>
+                  <div
+                    style={{
+                      backgroundImage: `url(${BackGroundKTN})`,
+                    }}
+                  ></div>
+                  <a href="#">
+                    <FormattedMessage id="banner.child8" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </section>
+        )}
       </>
     );
   }

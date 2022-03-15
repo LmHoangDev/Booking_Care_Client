@@ -22,6 +22,7 @@ import { CustomToastCloseButton } from "../components/CustomToast";
 import ConfirmModal from "../components/ConfirmModal";
 import HomePage from "./HomePage/HomePage";
 import CustomScrollbars from "../components/CustomScrollbars";
+import DetailDoctor from "./Patient/Doctor/DetailDoctor";
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -61,22 +62,10 @@ class App extends Component {
                     component={userIsAuthenticated(System)}
                   />
                   <Route path={path.HOMEPAGE} component={HomePage} />
+                  <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                 </Switch>
               </CustomScrollbars>
             </div>
-
-            {/* <ToastContainer
-              className="toast-container"
-              toastClassName="toast-item"
-              bodyClassName="toast-item-body"
-              autoClose={false}
-              hideProgressBar={true}
-              pauseOnHover={false}
-              pauseOnFocusLoss={true}
-              closeOnClick={false}
-              draggable={false}
-              closeButton={<CustomToastCloseButton />}
-            /> */}
             <ToastContainer
               position="top-right"
               autoClose={3000}

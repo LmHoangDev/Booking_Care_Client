@@ -1,0 +1,18 @@
+.avatar-doctor {
+    &-detail {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    &-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.name-doctor {
+    font-family: "Montserrat" sans-serif;
+    font-size: 27px;
+}

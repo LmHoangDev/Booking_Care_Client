@@ -5,6 +5,7 @@ import BDDBS from "../../../assets/outstanding-doctor/103848anh-dai-dien-bs.jpg"
 import Slider from "react-slick";
 import * as actions from "../../../store/actions";
 import { languages } from "../../../utils/constant";
+import { withRouter } from "react-router";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,6 +26,10 @@ class OutStandingDoctor extends Component {
       });
     }
   }
+  handleViewDetailDoctor = (item) => {
+    // console.log("View detail", item);
+    this.props.history.push(`/detail-doctor/${item.id}`);
+  };
 
   render() {
     let settings = {
@@ -65,7 +70,11 @@ class OutStandingDoctor extends Component {
                   let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName} `;
                   let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
                   return (
-                    <div class="section-item" key={index}>
+                    <div
+                      class="section-item"
+                      key={index}
+                      onClick={() => this.handleViewDetailDoctor(item)}
+                    >
                       <a href="#">
                         <img src={imageBase64} alt="" />
                         <h3>{language === languages.VI ? nameVi : nameEn}</h3>
@@ -96,4 +105,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(OutStandingDoctor)
+);

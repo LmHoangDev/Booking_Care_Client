@@ -12,7 +12,7 @@ class HomePage extends Component {
   render() {
     return (
       <>
-        <HomeHeader />
+        <HomeHeader isShowBanner={true} />
         <Specialty />
         <MedicalFacility />
         <OutStandingDoctor />
