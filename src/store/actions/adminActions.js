@@ -255,19 +255,19 @@ export const fetchSaveInfoDoctorStart = (data) => {
       let res = await saveDetailDoctorsService(data);
       console.log(res);
       if (res && res.errCode === 0) {
-        toast.success("Thêm mới chi tiết bác sĩ thành công!");
+        toast.success("Save information successfully !");
         dispatch({
           type: actionTypes.SAVE_DETAIL_DOCTOR_SUCCESS,
         });
       } else {
-        toast.error("Thêm mới chi tiết bác sĩ thất bại!");
+        toast.error("Save information failded !");
         dispatch({
           type: actionTypes.SAVE_DETAIL_DOCTOR_FAILED,
         });
       }
     } catch (error) {
       console.log(error);
-      toast.error("Thêm mới chi tiết bác sĩ thất bại!");
+      toast.error("Save information failded!");
     }
   };
 };

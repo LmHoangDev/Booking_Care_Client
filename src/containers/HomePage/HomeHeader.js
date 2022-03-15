@@ -11,9 +11,13 @@ import BackGroundGPT from "../../assets/images/134356-goi-phau-thuat.png";
 import BackGroundKTN from "../../assets/images/133744-khamtainha.png";
 import { languages } from "../../utils/constant";
 import { changeLanguageApp } from "../../store/actions";
+import { withRouter } from "react-router";
 class HomeHeader extends Component {
   changeLanguage = (language) => {
     this.props.changeLanguageAppRedux(language);
+  };
+  handleGoBackHome = () => {
+    this.props.history.push("/home");
   };
   render() {
     let language = this.props.language;
@@ -22,7 +26,10 @@ class HomeHeader extends Component {
         <header className="header-home-page">
           <div className="container">
             <div className="row">
-              <div className="col-3 header-left">
+              <div
+                className="col-3 header-left"
+                onClick={() => this.handleGoBackHome()}
+              >
                 <a href="#">
                   <i className="fa fa-bars"></i>
                 </a>
@@ -229,4 +236,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(HomeHeader)
+);
