@@ -170,5 +170,10 @@
         "handbook": "Handbook",
         "media-booking-care": "Media talk about BookingCare",
         "all-posts": "All posts"
+    },
+    "manage-schedule": {
+        "title": "Manage doctor's examination plan",
+        "choose-doctor": "Select a doctor",
+        "choose-date": "Select date"
     }
 }

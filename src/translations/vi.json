@@ -170,5 +170,10 @@
         "handbook": "Cẩm nang",
         "media-booking-care": "Truyền thông nói về BookingCare",
         "all-posts": "Tất cả bài viết"
+    },
+    "manage-schedule": {
+        "title": "Quản lý kế hoạch khám bệnh",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày"
     }
 }
