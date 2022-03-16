@@ -51,18 +51,6 @@
         "userpass-wrong": "Invalid username or password!"
     },
     "menu": {
-        "system": {
-            "header": "System",
-            "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "user-redux": "Manage users using redux",
-                "register-package-group-or-account": "Register service package for group/account"
-            },
-            "system-parameter": {
-                "header": "System-parameter"
-            }
-        },
         "admin": {
             "manage-user": "Users System",
             "manage-doctor": "Manage Doctors",
@@ -77,7 +65,8 @@
 
             "handbook": "Handbook",
             "manage-handbook": "Manage Handbooks"
-        }
+        },
+        "doctor": { "manage-schedule": "Manage Doctor's Schedule" }
     },
     "system": {
         "user-manage": {

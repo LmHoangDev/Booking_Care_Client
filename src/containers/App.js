@@ -13,6 +13,7 @@ import {
 import { path } from "../utils";
 
 import Home from "../routes/Home";
+import Doctor from "../routes/Doctor";
 // import Login from '../routes/Login';
 import Login from "./Auth/Login";
 // import Header from "./Header/Header";
@@ -60,6 +61,10 @@ class App extends Component {
                   <Route
                     path={path.SYSTEM}
                     component={userIsAuthenticated(System)}
+                  />
+                  <Route
+                    path="/doctor/"
+                    component={userIsAuthenticated(Doctor)}
                   />
                   <Route path={path.HOMEPAGE} component={HomePage} />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />

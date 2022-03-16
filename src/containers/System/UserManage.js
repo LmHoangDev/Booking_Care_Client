@@ -32,9 +32,7 @@ class UserManage extends Component {
         this.setState({
           arrUsers: response.users,
         });
-        console.log(response.users);
       }
-      console.log(response.users);
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +103,7 @@ class UserManage extends Component {
     }
   };
   render() {
-    console.log("Check render", this.state);
+    // console.log("Check render", this.state);
     return (
       <div className="container">
         <h2 className="text-center">Manager user</h2>

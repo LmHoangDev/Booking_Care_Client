@@ -62,8 +62,8 @@ class ModalUser extends Component {
     }
   };
   render() {
-    console.log(this.props);
-    console.log(this.state);
+    // console.log(this.props);
+    // console.log(this.state);
     return (
       <Modal
         isOpen={this.props.isShowModel}
