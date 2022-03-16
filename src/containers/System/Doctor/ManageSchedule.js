@@ -3,18 +3,26 @@ import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 import * as actions from "../../../store/actions";
-import { languages, CRUD_ACTIONS, CommonUtils } from "../../../utils";
+import {
+  languages,
+  CRUD_ACTIONS,
+  CommonUtils,
+  dateFormat,
+} from "../../../utils";
 import Select from "react-select";
 import DatePicker from "../../../components/Input/DatePicker";
 import moment from "moment";
 import FormattedDate from "../../../components/Formating/FormattedDate";
+import { toast } from "react-toastify";
+import { saveBulkCreateSchedule } from "../../../services/userService";
+import _ from "lodash";
 class ManageSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       arrDoctors: [],
       arrTimes: [],
-      selectedOption: null,
+      selectedOption: {},
       currentDate: "",
     };
   }
@@ -31,8 +39,12 @@ class ManageSchedule extends Component {
       });
     }
     if (prevProps.listTime !== this.props.listTime) {
+      let data = this.props.listTime;
+      let copyData = data.map((item, index) => {
+        return { ...item, isSelected: false };
+      });
       this.setState({
-        arrTimes: this.props.listTime,
+        arrTimes: copyData,
       });
     }
     if (prevProps.language !== this.props.language) {
@@ -64,6 +76,65 @@ class ManageSchedule extends Component {
     this.setState({
       currentDate: date[0],
     });
+  };
+  handleClickTime = (time) => {
+    // console.log("Item selected", time);
+    let data = this.state.arrTimes;
+    let dataCopy = data.map((item, index) => {
+      if (item.id === time.id) {
+        item.isSelected = !item.isSelected;
+      }
+      return item;
+    });
+    this.setState({
+      arrTimes: dataCopy,
+    });
+  };
+
+  handleSaveInfor = async () => {
+    let { arrTimes, selectedOption, currentDate } = this.state;
+    let result = [];
+
+    if (_.isEmpty(selectedOption)) {
+      toast.error("Invalid selected doctor !");
+      return;
+    }
+    if (!currentDate) {
+      toast.error("Invalid date !");
+      return;
+    }
+
+    // let formatDate = moment(currentDate).format(dateFormat.SEND_TO_SERVER);
+    let formatDate = new Date(currentDate).getTime();
+
+    if (arrTimes && arrTimes.length > 0) {
+      let filterTimes = arrTimes.filter((item) => item.isSelected === true);
+      if (filterTimes && filterTimes.length > 0) {
+        filterTimes.map((schedule, index) => {
+          let object = {};
+          object.doctorId = selectedOption.value;
+          object.date = formatDate;
+          object.timeType = schedule.keyMap;
+          result.push(object);
+        });
+      } else {
+        toast.error("Invalid selected time !");
+        return;
+      }
+    }
+    if (!_.isEmpty(result)) {
+      try {
+        let res = await saveBulkCreateSchedule({
+          arrSchedule: result,
+          doctorId: selectedOption.value,
+          formatDate: formatDate,
+        });
+        console.log("res", res);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    console.log("Result", result);
   };
 
   render() {
@@ -108,13 +179,27 @@ class ManageSchedule extends Component {
                 arrTimes.length > 0 &&
                 arrTimes.map((item, index) => {
                   return (
-                    <button key={index} className="btn btn-warning">
+                    <button
+                      key={index}
+                      className={
+                        item.isSelected
+                          ? "btn btn-warning"
+                          : "btn btn-default border border-dark"
+                      }
+                      onClick={() => this.handleClickTime(item)}
+                    >
                       {language === languages.VI ? item.valueVi : item.valueEn}
                     </button>
                   );
                 })}
             </div>
           </div>
+          <button
+            className="btn btn-primary text-light mt-4"
+            onClick={() => this.handleSaveInfor()}
+          >
+            Lưu thông tin
+          </button>
         </div>
       </>
     );
