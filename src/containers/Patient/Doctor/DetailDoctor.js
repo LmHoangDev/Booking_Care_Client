@@ -5,6 +5,7 @@ import { languages } from "../../../utils/constant";
 // import { Redirect, Route, Switch } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
+import DoctorExtraInfor from "./DoctorExtraInfor";
 import DoctorSchedule from "./DoctorSchedule";
 class DetailDoctor extends Component {
   constructor(props) {
@@ -87,7 +88,9 @@ class DetailDoctor extends Component {
                   }
                 />
               </div>
-              <div className="col-6"></div>
+              <div className="col-6">
+                <DoctorExtraInfor />
+              </div>
             </div>
           </div>
           <div className="detail-doctor">
