@@ -5,6 +5,7 @@ import { languages } from "../../../utils/constant";
 // import { Redirect, Route, Switch } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
 import "./DetailDoctor.scss";
+import DoctorSchedule from "./DoctorSchedule";
 class DetailDoctor extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +78,18 @@ class DetailDoctor extends Component {
               </div>
             </div>
           </div>
-          <div className="schedule-intro"></div>
+          <div className="schedule-intro my-4">
+            <div className="row">
+              <div className="col-6">
+                <DoctorSchedule
+                  doctorIdFromParent={
+                    detailDoctor && detailDoctor.id ? detailDoctor.id : -1
+                  }
+                />
+              </div>
+              <div className="col-6"></div>
+            </div>
+          </div>
           <div className="detail-doctor">
             {detailDoctor &&
               detailDoctor.Markdown &&
