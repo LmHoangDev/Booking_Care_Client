@@ -179,5 +179,14 @@
         "no-schedule": "There are no medical appointments during this time.",
         "choose": "Choose",
         "book-free": "and book (Free)"
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create doctor information",
+            "choose-doctor": "Choose doctor",
+            "intro-infor": "Introduction information",
+            "add": "Create information",
+            "save": "Save information"
+        }
     }
 }

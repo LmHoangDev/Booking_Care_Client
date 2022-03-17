@@ -9,6 +9,10 @@ const initialState = {
   topDoctors: [], //all-doctors-limit
   doctors: [], //all-doctors
   allDataTime: [], //all-times
+
+  //get-all-required-doctor-information
+
+  allRequiredDoctors: {},
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -106,6 +110,18 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         allDataTime: [],
+      };
+    case actionTypes.FETCH_ALL_REQUIRED_DOCTOR_INFOR_SUCCESS:
+      return {
+        ...state,
+        allRequiredDoctors: action.data,
+        isLoadingGender: false,
+      };
+    case actionTypes.FETCH_ALL_REQUIRED_DOCTOR_INFOR_FAILED:
+      return {
+        ...state,
+        allRequiredDoctors: {},
+        isLoadingGender: false,
       };
     default:
       return state;
