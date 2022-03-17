@@ -124,7 +124,7 @@ class Login extends Component {
               <a href="#">
                 <i className="fab fa-google-plus-g"></i>
               </a>
-              <a href="">
+              <a href="#">
                 <i className="fab fa-facebook"></i>
               </a>
             </div>
