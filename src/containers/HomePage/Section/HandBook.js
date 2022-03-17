@@ -35,31 +35,31 @@ class HandBook extends Component {
               </div>
             </div>
             <Slider {...settings}>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={ImgYHCT} alt="" />
                   <p>Y học cổ truyền</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={ImgCS} alt="" />
                   <p>Cột sống</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={ImgBSGD} alt="" />
                   <p>Bác sĩ gia đình</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={ImgUB} alt="" />
                   <p>Ung bướu</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={ImgTHHM} alt="" />
                   <p>Tạo hình hàm mặt</p>

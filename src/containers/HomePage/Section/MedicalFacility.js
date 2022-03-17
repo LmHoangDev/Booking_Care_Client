@@ -31,31 +31,31 @@ class MedicalFacility extends Component {
               </div>
             </div>
             <Slider {...settings}>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={imgBVTN} alt="" />
                   <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={imgBVTN} alt="" />
                   <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={imgBVTN} alt="" />
                   <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={imgBVTN} alt="" />
                   <p>Bệnh viện thanh nhàn</p>
                 </a>
               </div>
-              <div class="section-item">
+              <div className="section-item">
                 <a href="#" className="d-block">
                   <img src={imgBVTN} alt="" />
                   <p>Bệnh viện thanh nhàn</p>

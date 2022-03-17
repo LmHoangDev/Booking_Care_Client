@@ -18,35 +18,65 @@ class DoctorSchedule extends Component {
   capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
-  setArrDays = (language) => {
+  getArrDays = (language) => {
     let arrDate = [];
     for (let i = 0; i < 7; i++) {
       let object = [];
       if (language === languages.VI) {
-        let labelVi = moment(new Date()).add(i, "days").format("dddd - DD/MM");
-        object.label = this.capitalizeFirstLetter(labelVi);
+        if (i === 0) {
+          let ddMM = moment(new Date()).format("DD/MM");
+          let today = `Hôm nay - ${ddMM}`;
+          object.label = today;
+        } else {
+          let labelVi = moment(new Date())
+            .add(i, "days")
+            .format("dddd - DD/MM");
+          object.label = this.capitalizeFirstLetter(labelVi);
+        }
       } else {
-        object.label = moment(new Date())
-          .add(i, "days")
-          .locale("en")
-          .format("ddd - DD/MM");
+        if (i === 0) {
+          let ddMM2 = moment(new Date()).format("DD/MM");
+          let today = `Today - ${ddMM2}`;
+          object.label = today;
+        } else {
+          object.label = moment(new Date())
+            .add(i, "days")
+            .locale("en")
+            .format("ddd - DD/MM");
+        }
       }
 
       object.value = moment(new Date()).add(i, "days").startOf("day").valueOf();
       arrDate.push(object);
     }
 
-    this.setState({
-      allDays: arrDate,
-    });
+    return arrDate;
   };
   async componentDidMount() {
     let { language } = this.props;
-    this.setArrDays(language);
+    let arrDays = this.getArrDays(language);
+    this.setState({
+      allDays: arrDays,
+    });
   }
-  componentDidUpdate(prevProps, prevState) {
+  async componentDidUpdate(prevProps, prevState) {
     if (prevProps.language !== this.props.language) {
-      this.setArrDays(this.props.language);
+      let arrDays = this.getArrDays(this.props.language);
+      this.setState({
+        allDays: arrDays,
+      });
+    }
+    // fetch-api-first
+    if (prevProps.doctorIdFromParent !== this.props.doctorIdFromParent) {
+      let res = await getScheduleDoctorByDateService(
+        this.props.doctorIdFromParent,
+        this.state.allDays[0].value
+      );
+      if (res && res.errCode === 0) {
+        this.setState({
+          allAvailableTimes: res.data ? res.data : [],
+        });
+      }
     }
   }
   handleChangeTime = async (e) => {
@@ -91,19 +121,30 @@ class DoctorSchedule extends Component {
               <FormattedMessage id="manage-schedule.schedule" />
             </span>
           </div>
-          <div className="list-calendar mt-3">
+          <div>
             {allAvailableTimes && allAvailableTimes.length > 0 ? (
-              allAvailableTimes.map((item, index) => {
-                let timeDisplay =
-                  language === languages.VI
-                    ? item.timeTypeData.valueVi
-                    : item.timeTypeData.valueEn;
-                return (
-                  <button className="btn btn-warning" key={index}>
-                    {timeDisplay}
-                  </button>
-                );
-              })
+              <>
+                <div className="list-calendar mt-3">
+                  {allAvailableTimes.map((item, index) => {
+                    let timeDisplay =
+                      language === languages.VI
+                        ? item.timeTypeData.valueVi
+                        : item.timeTypeData.valueEn;
+                    return (
+                      <button className="btn btn-warning" key={index}>
+                        {timeDisplay}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-2">
+                  <span>
+                    <FormattedMessage id="manage-schedule.choose" />{" "}
+                    <i className="far fa-hand-point-up"></i>{" "}
+                    <FormattedMessage id="manage-schedule.book-free" />
+                  </span>
+                </div>
+              </>
             ) : (
               <div className="text-danger announce">
                 <FormattedMessage id="manage-schedule.no-schedule" />

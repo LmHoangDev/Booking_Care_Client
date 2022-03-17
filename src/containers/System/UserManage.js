@@ -115,7 +115,7 @@ class UserManage extends Component {
             <i className="fas fa-plus"></i> Thêm mới
           </button>
         </div>
-        <table class="table table-dark table-hover">
+        <table className="table table-dark table-hover">
           <thead>
             <tr>
               <th>Email</th>

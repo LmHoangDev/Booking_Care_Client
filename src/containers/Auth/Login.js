@@ -94,7 +94,7 @@ class Login extends Component {
               />
 
               <i
-                class={
+                className={
                   this.state.isShowPassword ? "fas fa-eye" : "fas fa-eye-slash"
                 }
                 onClick={() => this.handleChangeTypePassword()}
@@ -122,10 +122,10 @@ class Login extends Component {
                 <span className="font-weight-bold">Or login with</span>
               </div>
               <a href="#">
-                <i class="fab fa-google-plus-g"></i>
+                <i className="fab fa-google-plus-g"></i>
               </a>
               <a href="">
-                <i class="fab fa-facebook"></i>
+                <i className="fab fa-facebook"></i>
               </a>
             </div>
           </form>

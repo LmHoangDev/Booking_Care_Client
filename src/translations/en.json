@@ -176,6 +176,8 @@
         "choose-doctor": "Select a doctor",
         "choose-date": "Select date",
         "schedule": "Medical examination schedule",
-        "no-schedule": "There are no medical appointments during this time."
+        "no-schedule": "There are no medical appointments during this time.",
+        "choose": "Choose",
+        "book-free": "and book (Free)"
     }
 }

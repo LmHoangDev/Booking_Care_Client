@@ -71,7 +71,7 @@ class OutStandingDoctor extends Component {
                   let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
                   return (
                     <div
-                      class="section-item"
+                      className="section-item"
                       key={index}
                       onClick={() => this.handleViewDetailDoctor(item)}
                     >
