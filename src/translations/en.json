@@ -174,6 +174,8 @@
     "manage-schedule": {
         "title": "Manage doctor's examination plan",
         "choose-doctor": "Select a doctor",
-        "choose-date": "Select date"
+        "choose-date": "Select date",
+        "schedule": "Medical examination schedule",
+        "no-schedule": "There are no medical appointments during this time."
     }
 }

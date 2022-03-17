@@ -1,0 +1,44 @@
+.all-available-time {
+    padding: 10px 0;
+    .text-calendar {
+        span {
+            font-size: 16px;
+            font-family: "Montserrat" sans-serif;
+            text-transform: uppercase;
+        }
+        .icon-calendar {
+            margin: 0 10px;
+        }
+    }
+    .list-calendar {
+        display: flex;
+        justify-content: start;
+        flex-wrap: wrap;
+        gap: 10px;
+        border: 1px solid transparent;
+        outline: none;
+        button {
+            &:hover {
+                background-color: rgb(12, 90, 235);
+                color: #fff;
+                border: 1px solid transparent;
+            }
+        }
+    }
+}
+
+.select-date {
+    background: transparent;
+    border: none;
+    color: #337ab7;
+    border-bottom: 1px solid #999;
+    border-radius: 0;
+    font-weight: bold;
+    padding: 3px 10px;
+    outline: none;
+}
+
+.announce {
+    font-weight: 600;
+    margin-left: 10px;
+}
