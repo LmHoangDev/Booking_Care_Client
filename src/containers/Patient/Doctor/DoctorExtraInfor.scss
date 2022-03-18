@@ -1,0 +1,38 @@
+.address {
+    h3 {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: #666;
+        font-weight: bold;
+    }
+    p.specialty {
+        font-size: 13px;
+        color: #000;
+        font-weight: 600;
+    }
+}
+
+.price {
+    .show-detail {
+        color: rgb(64, 124, 252);
+        cursor: pointer;
+    }
+    .price-detail {
+        max-width: 80%;
+        border: 1px solid #ddd;
+        padding: 5px;
+        .payment-container {
+            background-color: #ddd;
+            border-top: 1px solid rgb(161, 155, 155);
+            padding: 8px 3px 3px 3px;
+            vertical-align: middle;
+        }
+        .hidden-price {
+            color: rgb(64, 124, 252);
+            cursor: pointer;
+        }
+        .price-top {
+            background-color: #f8f8f8;
+        }
+    }
+}

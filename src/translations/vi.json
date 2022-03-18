@@ -195,5 +195,14 @@
             "note": "Ghi chú",
             "infor-detail": "Thông tin chi tiết"
         }
+    },
+    "patient": {
+        "extra-infor": {
+            "address": "Địa chỉ khám",
+            "price": "Giá khám",
+            "see": "Xem chi tiết",
+            "hide-price": "Ẩn bảng giá",
+            "payment": "Phòng khám có thanh toán bằng hình thức "
+        }
     }
 }

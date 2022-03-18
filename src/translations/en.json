@@ -195,5 +195,14 @@
             "note": "Note",
             "infor-detail": "Details information"
         }
+    },
+    "patient": {
+        "extra-infor": {
+            "address": "Examination address",
+            "price": "Examination price",
+            "see": "Show details",
+            "hide-price": "Hide price list",
+            "payment": "The clinic has payment in the form of "
+        }
     }
 }

@@ -8,6 +8,7 @@ import {
   getTopDoctorHomeService,
   getAllDoctorsService,
   saveDetailDoctorsService,
+  getExtraInforDoctorByIdService,
 } from "../../services/userService";
 // export const fetchGenderStart = () => ({
 //   type: actionTypes.FETCH_GENDER_START,
@@ -331,4 +332,29 @@ export const fetchAllRequiredDoctorInforSuccess = (data) => ({
 
 export const fetchAllRequiredDoctorInforFailed = () => ({
   type: actionTypes.FETCH_ALL_REQUIRED_DOCTOR_INFOR_FAILED,
+});
+
+// get-extra-infor-doctor-by-id
+export const fetchExtraDoctorInforStart = (id) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await getExtraInforDoctorByIdService(id);
+
+      if (res && res.errCode === 0) {
+        dispatch(fetchExtraDoctorInforSuccess(res.data));
+      } else {
+        dispatch(fetchAllRequiredDoctorInforFailed());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const fetchExtraDoctorInforSuccess = (data) => ({
+  type: actionTypes.FETCH_EXTRA_DOCTOR_INFOR_SUCCESS,
+  data,
+});
+
+export const fetchExtraDoctorInforFailed = () => ({
+  type: actionTypes.FETCH_EXTRA_DOCTOR_INFOR_FAILED,
 });

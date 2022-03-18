@@ -88,8 +88,12 @@ class DetailDoctor extends Component {
                   }
                 />
               </div>
-              <div className="col-6">
-                <DoctorExtraInfor />
+              <div className="col-6 extra-infor">
+                <DoctorExtraInfor
+                  doctorIdFromParent={
+                    detailDoctor && detailDoctor.id ? detailDoctor.id : -1
+                  }
+                />
               </div>
             </div>
           </div>

@@ -13,6 +13,7 @@ const initialState = {
   //get-all-required-doctor-information
 
   allRequiredDoctors: {},
+  allExtraInforDoctor: {},
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -122,6 +123,16 @@ const adminReducer = (state = initialState, action) => {
         ...state,
         allRequiredDoctors: {},
         isLoadingGender: false,
+      };
+    case actionTypes.FETCH_EXTRA_DOCTOR_INFOR_SUCCESS:
+      return {
+        ...state,
+        allExtraInforDoctor: action.data,
+      };
+    case actionTypes.FETCH_EXTRA_DOCTOR_INFOR_FAILED:
+      return {
+        ...state,
+        allExtraInforDoctor: {},
       };
     default:
       return state;
