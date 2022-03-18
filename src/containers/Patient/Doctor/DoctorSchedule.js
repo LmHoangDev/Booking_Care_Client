@@ -7,12 +7,15 @@ import { getScheduleDoctorByDateService } from "../../../services/userService";
 import localization from "moment/locale/vi";
 import { FormattedMessage } from "react-intl";
 import "./DoctorSchedule.scss";
+import BookingModal from "./Modal/BookingModal";
 class DoctorSchedule extends Component {
   constructor(props) {
     super(props);
     this.state = {
       allDays: [],
       allAvailableTimes: [],
+      isShowModal: false,
+      dataScheduleTimeModal: {},
     };
   }
   capitalizeFirstLetter = (string) => {
@@ -90,7 +93,15 @@ class DoctorSchedule extends Component {
       });
     }
   };
-
+  toggleModal = () => {
+    this.setState({
+      isShowModal: !this.state.isShowModal,
+    });
+  };
+  handleShowModal = (item) => {
+    this.setState({ isShowModal: true, dataScheduleTimeModal: item });
+    // console.log("Item show modal", item);
+  };
   render() {
     let { language } = this.props;
     let { allDays, allAvailableTimes } = this.state;
@@ -131,7 +142,11 @@ class DoctorSchedule extends Component {
                         ? item.timeTypeData.valueVi
                         : item.timeTypeData.valueEn;
                     return (
-                      <button className="btn btn-warning" key={index}>
+                      <button
+                        className="btn btn-warning"
+                        key={index}
+                        onClick={() => this.handleShowModal(item)}
+                      >
                         {timeDisplay}
                       </button>
                     );
@@ -152,6 +167,12 @@ class DoctorSchedule extends Component {
             )}
           </div>
         </div>
+
+        <BookingModal
+          isShowModal={this.state.isShowModal}
+          toggleModal={this.toggleModal}
+          dataTime={this.state.dataScheduleTimeModal}
+        />
       </>
     );
   }

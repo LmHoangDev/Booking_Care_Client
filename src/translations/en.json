@@ -202,7 +202,8 @@
             "price": "Examination price",
             "see": "Show details",
             "hide-price": "Hide price list",
-            "payment": "The clinic has payment in the form of "
+            "payment": "The clinic has payment in the form of ",
+            "infor-booking": "Information to schedule a medical appointment"
         }
     }
 }

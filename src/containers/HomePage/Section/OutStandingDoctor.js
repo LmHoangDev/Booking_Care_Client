@@ -9,6 +9,7 @@ import { withRouter } from "react-router";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { CommonUtils } from "../../../utils";
 class OutStandingDoctor extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +69,7 @@ class OutStandingDoctor extends Component {
                     );
                   }
                   let nameVi = `${item.positionData.valueVi}, ${item.lastName} ${item.firstName} `;
-                  let nameEn = `${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`;
+                  let nameEn = CommonUtils.removeVietnameseTones(`${item.positionData.valueEn}, ${item.firstName} ${item.lastName}`);
                   return (
                     <div
                       className="section-item"

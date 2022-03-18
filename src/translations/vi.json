@@ -202,7 +202,8 @@
             "price": "Giá khám",
             "see": "Xem chi tiết",
             "hide-price": "Ẩn bảng giá",
-            "payment": "Phòng khám có thanh toán bằng hình thức "
+            "payment": "Phòng khám có thanh toán bằng hình thức ",
+            "infor-booking": "Thông tin đặt lịch khám bệnh"
         }
     }
 }

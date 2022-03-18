@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDetailDoctorById } from "../../../services/userService";
+import { CommonUtils } from "../../../utils";
 import { languages } from "../../../utils/constant";
 // import { Redirect, Route, Switch } from "react-router-dom";
 import HomeHeader from "../../HomePage/HomeHeader";
@@ -40,7 +41,9 @@ class DetailDoctor extends Component {
       if (language === languages.VI) {
         name = `${data.positionData.valueVi} ${data.lastName} ${data.firstName}`;
       } else {
-        name = `${data.positionData.valueEn} ${data.firstName} ${data.lastName}`;
+        name = CommonUtils.removeVietnameseTones(
+          `${data.positionData.valueEn} ${data.firstName} ${data.lastName}`
+        );
       }
     } else {
       name = "";
