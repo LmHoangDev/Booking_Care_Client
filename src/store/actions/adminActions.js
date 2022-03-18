@@ -9,10 +9,9 @@ import {
   getAllDoctorsService,
   saveDetailDoctorsService,
   getExtraInforDoctorByIdService,
+  postPatientBookingAppointmentService,
 } from "../../services/userService";
-// export const fetchGenderStart = () => ({
-//   type: actionTypes.FETCH_GENDER_START,
-// });
+
 import { toast } from "react-toastify";
 //gender
 export const fetchGenderStart = () => {
@@ -357,4 +356,30 @@ export const fetchExtraDoctorInforSuccess = (data) => ({
 
 export const fetchExtraDoctorInforFailed = () => ({
   type: actionTypes.FETCH_EXTRA_DOCTOR_INFOR_FAILED,
+});
+
+//save-patient-booking-appointment
+
+export const savePatientBookingAppointment = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await postPatientBookingAppointmentService(data);
+      console.log("res", res);
+      if (res && res.infor.errCode === 0) {
+        toast.success("Save booking appointment successfully");
+        dispatch(savePatientBookingAppointmentSuccess());
+      } else {
+        toast.error("Save booking appointment failed");
+        dispatch(savePatientBookingAppointmentFailed());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const savePatientBookingAppointmentSuccess = () => ({
+  type: actionTypes.SAVE_BOOKING_APPOINTMENT_SUCCESS,
+});
+export const savePatientBookingAppointmentFailed = () => ({
+  type: actionTypes.SAVE_BOOKING_APPOINTMENT_FAILED,
 });

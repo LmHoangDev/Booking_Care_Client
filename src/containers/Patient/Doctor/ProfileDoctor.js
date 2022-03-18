@@ -5,6 +5,8 @@ import { getProfileDoctorByIdService } from "../../../services/userService";
 import { languages, CommonUtils } from "../../../utils";
 import NumberFormat from "react-number-format";
 import "./ProfileDoctor.scss";
+import _ from "lodash";
+import moment from "moment";
 class ProfileDoctor extends Component {
   constructor(props) {
     super(props);
@@ -43,15 +45,43 @@ class ProfileDoctor extends Component {
           `${data.positionData.valueEn} ${data.firstName} ${data.lastName}`
         );
       }
-    } else {
-      name = "";
     }
     return name;
+  };
+  renderTimeBooking = (dataTime) => {
+    let { language } = this.props;
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let time =
+        language === languages.VI
+          ? dataTime.timeTypeData.valueVi
+          : dataTime.timeTypeData.valueEn;
+      let date =
+        language === languages.VI
+          ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataTime.date / 1000)
+              .locale("en")
+              .format("dddd - DD/MM/YYYY");
+      return (
+        <>
+          <div>
+            <span>
+              {time} / {date.charAt(0).toUpperCase() + date.slice(1)}
+            </span>
+            <br />
+            <span>
+              <FormattedMessage id="patient.extra-infor.free-booking" />
+            </span>
+          </div>
+        </>
+      );
+    }
   };
 
   render() {
     let { inforDoctor } = this.state;
-    let { language } = this.props;
+    let { language, isShowDescription, dataTime } = this.props;
+    // console.log(dataTime);
 
     return (
       <>
@@ -68,12 +98,15 @@ class ProfileDoctor extends Component {
               <h4 className="fs-5 fw-bold">
                 {this.showName(inforDoctor, language)}
               </h4>
-              <p>
-                {inforDoctor &&
-                  inforDoctor.Markdown &&
-                  inforDoctor.Markdown.description}
-              </p>
-              <p>14:00 - 14:30 - Thứ 6 - 18/03/2022</p>
+              {isShowDescription ? (
+                <p>
+                  {inforDoctor &&
+                    inforDoctor.Markdown &&
+                    inforDoctor.Markdown.description}
+                </p>
+              ) : (
+                <>{this.renderTimeBooking(dataTime)}</>
+              )}
             </div>
           </div>
           <div className="col-12 mt-2">

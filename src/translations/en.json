@@ -203,7 +203,17 @@
             "see": "Show details",
             "hide-price": "Hide price list",
             "payment": "The clinic has payment in the form of ",
-            "infor-booking": "Information to schedule a medical appointment"
+            "infor-booking": "Information to schedule a medical appointment",
+            "free-booking": "Free appointment booking",
+            "email": "Email",
+            "phone": "Phone number",
+            "address-patient": "Address",
+            "fullname": "Fullname",
+            "gender": "Gender",
+            "birthday": "Birthday",
+            "reason": "Reason",
+            "confirm": "Confirm",
+            "cancel": "Cancel"
         }
     }
 }
