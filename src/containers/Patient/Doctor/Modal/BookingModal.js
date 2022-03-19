@@ -8,6 +8,7 @@ import Select from "react-select";
 import DatePicker from "../../../../components/Input/DatePicker";
 import * as actions from "../../../../store/actions";
 import { languages } from "../../../../utils";
+import moment from "moment";
 class BookingModal extends Component {
   constructor(props) {
     super(props);
@@ -52,6 +53,36 @@ class BookingModal extends Component {
       }
     }
   }
+  buildTimeBooking = (dataTime) => {
+    let { language } = this.props;
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let time =
+        language === languages.VI
+          ? dataTime.timeTypeData.valueVi
+          : dataTime.timeTypeData.valueEn;
+      let date =
+        language === languages.VI
+          ? moment.unix(+dataTime.date / 1000).format("dddd - DD/MM/YYYY")
+          : moment
+              .unix(+dataTime.date / 1000)
+              .locale("en")
+              .format("dddd - DD/MM/YYYY");
+      return `${time} / ${date}`;
+    }
+    return "";
+  };
+  buildDoctorName = (dataTime) => {
+    let { language } = this.props;
+    if (dataTime && !_.isEmpty(dataTime)) {
+      let name =
+        language === languages.VI
+          ? `${dataTime.doctorData.lastName} ${dataTime.doctorData.firstName}`
+          : `${dataTime.doctorData.firstName} ${dataTime.doctorData.lastName}`;
+
+      return name;
+    }
+    return "";
+  };
   handleSaveMedicalAppointment = async () => {
     let {
       fullName,
@@ -64,6 +95,8 @@ class BookingModal extends Component {
       timeType,
     } = this.state;
     let date = new Date(this.state.birthday).getTime();
+    let timeString = this.buildTimeBooking(this.props.dataTime);
+    let doctorName = this.buildDoctorName(this.props.dataTime);
     await this.props.savePatientBookingAppointment({
       fullName,
       phoneNumber,
@@ -74,6 +107,9 @@ class BookingModal extends Component {
       doctorId: doctorId,
       selectedGender: selectedGender.value,
       timeType,
+      language: this.props.language,
+      timeString,
+      doctorName,
     });
     this.toggle();
   };
