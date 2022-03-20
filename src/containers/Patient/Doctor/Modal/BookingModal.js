@@ -111,7 +111,7 @@ class BookingModal extends Component {
       timeString,
       doctorName,
     });
-    this.toggle();
+    await this.toggle();
   };
   handleChange = (e) => {
     let { name, value } = e.target;
