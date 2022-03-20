@@ -56,6 +56,12 @@ class ManageSpecialty extends Component {
       console.log("res", res);
       if (res && res.errCode === 0) {
         toast.success("Create new specialty successfully");
+        this.setState({
+          name: "",
+          imageBase64: "",
+          descriptionHTML: "",
+          descriptionMarkdown: "",
+        });
       } else {
         toast.error("Create new specialty failed");
       }
@@ -81,6 +87,7 @@ class ManageSpecialty extends Component {
                 name="name"
                 placeholder="Tên chuyên khoa"
                 onChange={(e) => this.handleChangeInput(e)}
+                value={this.state.name}
               />
             </div>
             <div className="col-6">
@@ -95,6 +102,7 @@ class ManageSpecialty extends Component {
                 className="form-control"
                 // hidden
                 onChange={(e) => this.handleChangeImage(e)}
+                // value={this.state.imageBase64}
               />
               {/* <div
                 className="preview-image"
