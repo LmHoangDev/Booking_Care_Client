@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getListSpecialtyService } from "../../../services/userService";
+import { withRouter } from "react-router";
 class Specialty extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,10 @@ class Specialty extends Component {
       console.error(error);
     }
   }
+  handleViewDetailSpecialty = (item) => {
+    // console.log("View detail", item);
+    this.props.history.push(`/detail-specialty/${item.id}`);
+  };
   render() {
     let { listSpecialty } = this.state;
 
@@ -57,7 +62,11 @@ class Specialty extends Component {
                 listSpecialty.length > 0 &&
                 listSpecialty.map((item, index) => {
                   return (
-                    <div className="section-item" key={index}>
+                    <div
+                      className="section-item"
+                      key={index}
+                      onClick={() => this.handleViewDetailSpecialty(item)}
+                    >
                       <a href="#" className="d-block">
                         <img src={item.image} alt={item.name} />
                         <p>{item.name}</p>
@@ -84,4 +93,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Specialty)
+);

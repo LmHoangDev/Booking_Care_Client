@@ -193,7 +193,9 @@
             "nameClinic": "Clinic name",
             "addressClinic": "Clinic address",
             "note": "Note",
-            "infor-detail": "Details information"
+            "infor-detail": "Details information",
+            "specialty": "Choose a specialty",
+            "clinic": "Choose a clinic"
         }
     },
     "patient": {

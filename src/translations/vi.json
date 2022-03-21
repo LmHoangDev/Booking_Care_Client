@@ -193,7 +193,9 @@
             "nameClinic": "Tên phòng khám",
             "addressClinic": "Địa chỉ phòng khám",
             "note": "Ghi chú",
-            "infor-detail": "Thông tin chi tiết"
+            "infor-detail": "Thông tin chi tiết",
+            "specialty": "Chọn chuyên khoa",
+            "clinic": "Chọn phòng khám"
         }
     },
     "patient": {

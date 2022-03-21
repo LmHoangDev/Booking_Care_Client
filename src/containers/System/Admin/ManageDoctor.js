@@ -30,9 +30,13 @@ class ManageDoctor extends Component {
       listPrice: [],
       listPayment: [],
       listProvince: [],
+      listSpecialty: [],
+      listClinic: [],
       selectedPrice: "",
       selectedPayment: "",
       selectedProvince: "",
+      selectedSpecialty: "",
+      selectedClinic: "",
       nameClinic: "",
       addressClinic: "",
       note: "",
@@ -51,26 +55,33 @@ class ManageDoctor extends Component {
     }
     if (prevProps.language !== this.props.language) {
       let dataSelect = this.buildDataInput(this.props.listDoctors, "USERS");
-      let { prices, payments, provinces } = this.props.allRequiredDoctors;
+      let { prices, payments, provinces, specialties } =
+        this.props.allRequiredDoctors;
+
       let priceSelect = this.buildDataInput(prices, "PRICE");
       let paymentSelect = this.buildDataInput(payments, "PAYMENT");
       let provinceSelect = this.buildDataInput(provinces, "PROVINCE");
+      let specialtySelect = this.buildDataInput(specialties, "SPECIALTY");
       this.setState({
         arrDoctors: dataSelect,
         listPrice: priceSelect,
         listPayment: paymentSelect,
         listProvince: provinceSelect,
+        listSpecialty: specialtySelect,
       });
     }
     if (prevProps.allRequiredDoctors !== this.props.allRequiredDoctors) {
-      let { prices, payments, provinces } = this.props.allRequiredDoctors;
+      let { prices, payments, provinces, specialties } =
+        this.props.allRequiredDoctors;
       let priceSelect = this.buildDataInput(prices, "PRICE");
       let paymentSelect = this.buildDataInput(payments, "PAYMENT");
       let provinceSelect = this.buildDataInput(provinces, "PROVINCE");
+      let specialtySelect = this.buildDataInput(specialties, "SPECIALTY");
       this.setState({
         listPrice: priceSelect,
         listPayment: paymentSelect,
         listProvince: provinceSelect,
+        listSpecialty: specialtySelect,
       });
       // console.log("check all required", this.props.allRequiredDoctors);
     }
@@ -112,6 +123,15 @@ class ManageDoctor extends Component {
           result.push(object);
         });
       }
+      if (type === "SPECIALTY") {
+        inputData.map((item, index) => {
+          let object = {};
+
+          object.label = item.name;
+          object.value = item.id;
+          result.push(object);
+        });
+      }
     }
 
     return result;
@@ -138,6 +158,7 @@ class ManageDoctor extends Component {
         paymentId = "",
         priceId = "",
         provinceId = "";
+
       if (res.data.Doctor_infor) {
         addressClinic = res.data.Doctor_infor.addressClinic;
         nameClinic = res.data.Doctor_infor.nameClinic;
@@ -182,7 +203,6 @@ class ManageDoctor extends Component {
         selectedProvince: "",
       });
     }
-    console.log("Response", res);
   };
   handleChangeText = (e, id) => {
     let stateCopy = { ...this.state };
@@ -202,10 +222,10 @@ class ManageDoctor extends Component {
     console.log("Select onchange:", selectedOption, stateName);
   };
 
-  handleSaveMarkdown = () => {
+  handleSaveMarkdown = async () => {
     let { hasOldData } = this.state;
-    console.log("State :", this.state);
-    this.props.fetchSaveInfoDoctorRedux({
+
+    await this.props.fetchSaveInfoDoctorRedux({
       contentMarkdown: this.state.contentMarkdown,
       contentHTML: this.state.contentHTML,
       description: this.state.description,
@@ -215,9 +235,35 @@ class ManageDoctor extends Component {
       selectedPrice: this.state.selectedPrice.value,
       selectedPayment: this.state.selectedPayment.value,
       selectedProvince: this.state.selectedProvince.value,
+      selectedClinic: this.state.selectedClinic.value,
+      selectedSpecialty: this.state.selectedSpecialty.value,
+
       addressClinic: this.state.addressClinic,
       nameClinic: this.state.nameClinic,
       note: this.state.note,
+    });
+    this.setState({
+      contentHTML: "",
+      contentMarkdown: "",
+      selectedOption: null,
+      description: "",
+      arrDoctors: [],
+      hasOldData: false,
+
+      //save doctor_infor_table
+      listPrice: [],
+      listPayment: [],
+      listProvince: [],
+      listSpecialty: [],
+      listClinic: [],
+      selectedPrice: "",
+      selectedPayment: "",
+      selectedProvince: "",
+      selectedSpecialty: "",
+      selectedClinic: "",
+      nameClinic: "",
+      addressClinic: "",
+      note: "",
     });
   };
   render() {
@@ -247,7 +293,7 @@ class ManageDoctor extends Component {
             </label>
             <textarea
               cols="30"
-              rows="8"
+              rows="4"
               className="form-control"
               id="intro-info"
               value={this.state.description}
@@ -262,8 +308,6 @@ class ManageDoctor extends Component {
               <FormattedMessage id="admin.manage-doctor.price" />
             </label>
             <Select
-              // value={this.state.selectedOption}
-              // onChange={this.handleChange}
               options={this.state.listPrice}
               onChange={this.handleChangeSelectDoctorInfor}
               value={this.state.selectedPrice}
@@ -275,8 +319,6 @@ class ManageDoctor extends Component {
               <FormattedMessage id="admin.manage-doctor.payment" />
             </label>
             <Select
-              // value={this.state.selectedOption}
-              // onChange={this.handleChange}
               options={this.state.listPayment}
               onChange={this.handleChangeSelectDoctorInfor}
               value={this.state.selectedPayment}
@@ -288,8 +330,6 @@ class ManageDoctor extends Component {
               <FormattedMessage id="admin.manage-doctor.province" />
             </label>
             <Select
-              // value={this.state.selectedOption}
-              // onChange={this.handleChange}
               options={this.state.listProvince}
               onChange={this.handleChangeSelectDoctorInfor}
               value={this.state.selectedProvince}
@@ -329,6 +369,28 @@ class ManageDoctor extends Component {
               className="form-control"
               value={this.state.note}
               onChange={(e) => this.handleChangeText(e, "note")}
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label htmlFor="">
+              <FormattedMessage id="admin.manage-doctor.specialty" />
+            </label>
+            <Select
+              options={this.state.listSpecialty}
+              onChange={this.handleChangeSelectDoctorInfor}
+              value={this.state.selectedSpecialty}
+              name="selectedSpecialty"
+            />
+          </div>
+          <div className="col-4 form-group">
+            <label htmlFor="">
+              <FormattedMessage id="admin.manage-doctor.clinic" />
+            </label>
+            <Select
+              options={this.state.listClinic}
+              onChange={this.handleChangeSelectDoctorInfor}
+              value={this.state.selectedClinic}
+              name="selectedClinic"
             />
           </div>
         </div>
