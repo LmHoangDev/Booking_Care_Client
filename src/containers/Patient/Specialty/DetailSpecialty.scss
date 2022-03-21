@@ -1,0 +1,12 @@
+.detail-specialty-container {
+    background-color: #eee;
+    .detail-specialty-doctor {
+        box-shadow: 0 1px 6px rgba(193, 194, 201, 0.28);
+        border-radius: 8px;
+        img {
+            transform: translate(25px, 6px);
+        }
+        background-color: #fff;
+        margin-bottom: 20px;
+    }
+}
