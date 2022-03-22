@@ -43,7 +43,7 @@ class DetailSpecialty extends Component {
           let arrDoctorId = [];
           if (res.data.listDoctor && res.data.listDoctor.length > 0) {
             res.data.listDoctor.map((item, index) => {
-              arrDoctorId.push(item.doctorId);
+              return arrDoctorId.push(item.doctorId);
             });
           }
           this.setState({

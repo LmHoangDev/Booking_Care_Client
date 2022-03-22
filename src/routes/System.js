@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import UserManage from "../containers/System/UserManage";
-import UserRedux from "../containers/System/Admin/UserRedux";
-
 import Header from "../containers/Header/Header";
 import ManageDoctor from "../containers/System/Admin/ManageDoctor";
-import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
+import UserRedux from "../containers/System/Admin/UserRedux";
 import ManageClinic from "../containers/System/Clinic/ManageClinic";
+import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
+import UserManage from "../containers/System/UserManage";
+
 class System extends Component {
   render() {
     const { systemMenuPath, isLoggedIn } = this.props;

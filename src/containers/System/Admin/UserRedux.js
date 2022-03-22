@@ -1,13 +1,12 @@
-import React, { Component } from "react";
-import { FormattedMessage } from "react-intl";
-import { connect } from "react-redux";
-import { getAllCodeService } from "../../../services/userService";
-import { language, CRUD_ACTIONS, CommonUtils } from "../../../utils";
-import * as actions from "../../../store/actions";
-import "./UserRedux.scss";
+import { Component } from "react";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import * as actions from "../../../store/actions";
+import { CommonUtils, CRUD_ACTIONS } from "../../../utils";
 import TableManageUser from "./TableManageUser";
+import "./UserRedux.scss";
 // import { fetchGenderStart } from "../../../store/actions";
 class UserRedux extends Component {
   constructor(props) {
