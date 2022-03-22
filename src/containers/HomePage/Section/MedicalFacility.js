@@ -1,12 +1,34 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
-import imgBVTN from "../../../assets/medical-facility/082317benh-vien-thanh-nhan.jpg";
+import { getListClinicService } from "../../../services/userService";
+import { withRouter } from "react-router";
 import Slider from "react-slick";
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 class MedicalFacility extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      listClinic: [],
+    };
+  }
+  async componentDidMount() {
+    try {
+      let res = await getListClinicService();
+      if (res && res.errCode === 0) {
+        this.setState({
+          listClinic: res.data ? res.data : [],
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  handleViewDetailClinic = (item) => {
+    this.props.history.push(`/detail-clinic/${item.id}`);
+  };
   render() {
     let settings = {
       dots: false,
@@ -15,6 +37,7 @@ class MedicalFacility extends Component {
       slidesToShow: 4,
       slidesToScroll: 1,
     };
+    let { listClinic } = this.state;
     return (
       <>
         <div className="section-container medical-facility">
@@ -31,36 +54,21 @@ class MedicalFacility extends Component {
               </div>
             </div>
             <Slider {...settings}>
-              <div className="section-item">
-                <a href="#" className="d-block">
-                  <img src={imgBVTN} alt="" />
-                  <p>Bệnh viện thanh nhàn</p>
-                </a>
-              </div>
-              <div className="section-item">
-                <a href="#" className="d-block">
-                  <img src={imgBVTN} alt="" />
-                  <p>Bệnh viện thanh nhàn</p>
-                </a>
-              </div>
-              <div className="section-item">
-                <a href="#" className="d-block">
-                  <img src={imgBVTN} alt="" />
-                  <p>Bệnh viện thanh nhàn</p>
-                </a>
-              </div>
-              <div className="section-item">
-                <a href="#" className="d-block">
-                  <img src={imgBVTN} alt="" />
-                  <p>Bệnh viện thanh nhàn</p>
-                </a>
-              </div>
-              <div className="section-item">
-                <a href="#" className="d-block">
-                  <img src={imgBVTN} alt="" />
-                  <p>Bệnh viện thanh nhàn</p>
-                </a>
-              </div>
+              {listClinic &&
+                listClinic.length > 0 &&
+                listClinic.map((item, index) => {
+                  return (
+                    <div
+                      className="section-item"
+                      onClick={() => this.handleViewDetailClinic(item)}
+                    >
+                      <a href="#" className="d-block">
+                        <img src={item.image} alt="" />
+                        <p>{item.name}</p>
+                      </a>
+                    </div>
+                  );
+                })}
             </Slider>
           </div>
         </div>
@@ -80,4 +88,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MedicalFacility);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MedicalFacility)
+);

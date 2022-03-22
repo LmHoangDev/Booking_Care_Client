@@ -82,6 +82,13 @@ const postCreateNewClinicService = (data) => {
   return axios.post(`/api/create-new-clinic`, data);
 };
 
+const getListClinicService = () => {
+  return axios.get(`/api/get-all-clinic`);
+};
+const getDetailClinicByIdService = (data) => {
+  return axios.get(`/api/get-details-clinic-by-id?id=${data}`);
+};
+
 export {
   handleLoginApi,
   getAllUsers,
@@ -103,4 +110,6 @@ export {
   getListSpecialtyService,
   getDetailSpecialtyByIdLocationService,
   postCreateNewClinicService,
+  getListClinicService,
+  getDetailClinicByIdService,
 };
