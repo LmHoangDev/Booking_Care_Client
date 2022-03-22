@@ -168,6 +168,8 @@ class BookingModal extends Component {
                 doctorId={doctorId}
                 isShowDescription={false}
                 dataTime={dataTime}
+                isShowPrice={true}
+                isDetail={false}
               />
               <div className="row mt-2">
                 <div className="form-group col-6">

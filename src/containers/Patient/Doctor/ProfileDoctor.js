@@ -7,6 +7,7 @@ import NumberFormat from "react-number-format";
 import "./ProfileDoctor.scss";
 import _ from "lodash";
 import moment from "moment";
+import { Link } from "react-router-dom";
 class ProfileDoctor extends Component {
   constructor(props) {
     super(props);
@@ -86,35 +87,42 @@ class ProfileDoctor extends Component {
 
   render() {
     let { inforDoctor } = this.state;
-    let { language, isShowDescription, dataTime } = this.props;
+    let {
+      language,
+      isShowDescription,
+      dataTime,
+      isShowPrice,
+      isShowDetail,
+      doctorId,
+    } = this.props;
     // console.log(dataTime);
 
     return (
-      <>
-        <div className="row">
-          <div className="col-2 avatar-doctor-container">
-            <img
-              className="avatar-doctor-detail"
-              alt=".."
-              src={inforDoctor && inforDoctor.image}
-            />
+      <div className="row w-100">
+        <div className="col-2 avatar-doctor-container">
+          <img
+            className="avatar-doctor-detail"
+            alt=".."
+            src={inforDoctor && inforDoctor.image}
+          />
+        </div>
+        <div className="col-10">
+          <div className="px-5 py-4">
+            <h4 className="fs-5 fw-bold">
+              {this.showName(inforDoctor, language)}
+            </h4>
+            {isShowDescription ? (
+              <p>
+                {inforDoctor &&
+                  inforDoctor.Markdown &&
+                  inforDoctor.Markdown.description}
+              </p>
+            ) : (
+              <>{this.renderTimeBooking(dataTime)}</>
+            )}
           </div>
-          <div className="col-10">
-            <div className="px-5 py-4">
-              <h4 className="fs-5 fw-bold">
-                {this.showName(inforDoctor, language)}
-              </h4>
-              {isShowDescription ? (
-                <p>
-                  {inforDoctor &&
-                    inforDoctor.Markdown &&
-                    inforDoctor.Markdown.description}
-                </p>
-              ) : (
-                <>{this.renderTimeBooking(dataTime)}</>
-              )}
-            </div>
-          </div>
+        </div>
+        {isShowPrice ? (
           <div className="col-12 mt-2">
             <span>
               <FormattedMessage id="patient.extra-infor.price" />
@@ -148,8 +156,20 @@ class ProfileDoctor extends Component {
               )}
             </span>
           </div>
-        </div>
-      </>
+        ) : (
+          ""
+        )}
+        {isShowDetail ? (
+          <Link
+            className="mt-2 d-block see-more"
+            to={`/detail-doctor/${doctorId}`}
+          >
+            Xem thêm
+          </Link>
+        ) : (
+          ""
+        )}
+      </div>
     );
   }
 }

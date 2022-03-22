@@ -77,6 +77,11 @@ const getDetailSpecialtyByIdLocationService = (data) => {
     `/api/get-detail-specialty-by-id-location?id=${data.id}&location=${data.location}`
   );
 };
+
+const postCreateNewClinicService = (data) => {
+  return axios.post(`/api/create-new-clinic`, data);
+};
+
 export {
   handleLoginApi,
   getAllUsers,
@@ -97,4 +102,5 @@ export {
   postCreateNewSpecialtyService,
   getListSpecialtyService,
   getDetailSpecialtyByIdLocationService,
+  postCreateNewClinicService,
 };

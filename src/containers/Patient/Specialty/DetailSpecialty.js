@@ -143,15 +143,17 @@ class DetailSpecialty extends Component {
                   })}
               </select>
             </div>
-            {listDoctorsId &&
-              listDoctorsId.length > 0 &&
+            {listDoctorsId && listDoctorsId.length > 0 ? (
               listDoctorsId.map((item, index) => {
                 return (
                   <div className="row detail-specialty-doctor" key={index}>
-                    <div className="col-6 d-flex justify-content-center align-items-start">
+                    <div className="col-6 d-flex align-items-start">
                       <ProfileDoctor
                         doctorId={item}
                         isShowDescription={true}
+                        isShowPrice={false}
+                        isShowDetail={true}
+
                         // dataTime={dataTime}
                       />
                     </div>
@@ -165,7 +167,12 @@ class DetailSpecialty extends Component {
                     </div>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <p className="text-center fw-bold fs-5 text-danger py-3">
+                Không có thông tin bác sĩ ở địa điểm này!
+              </p>
+            )}
           </div>
         </div>
       </>
