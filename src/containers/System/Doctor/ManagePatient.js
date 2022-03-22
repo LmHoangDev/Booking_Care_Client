@@ -2,9 +2,14 @@ import { Component } from "react";
 import DatePicker from "react-flatpickr";
 import { FormattedMessage } from "react-intl";
 import { connect } from "react-redux";
-import { getAllPatientForDoctorService } from "../../../services/userService";
+import {
+  getAllPatientForDoctorService,
+  sendRemedyService,
+} from "../../../services/userService";
 import moment from "moment";
 import "./ManagePatient.scss";
+import RemedyModal from "./RemedyModal";
+import { toast } from "react-toastify";
 
 class ManagePatient extends Component {
   constructor(props) {
@@ -12,15 +17,17 @@ class ManagePatient extends Component {
     this.state = {
       currentDate: moment(new Date()).startOf("day").valueOf(),
       dataPatient: [],
+      isShowRemedyModal: false,
+      dataModal: "",
     };
   }
   async componentDidMount() {
+    this.getDataPatient();
+  }
+  getDataPatient = async () => {
     let { user } = this.props;
     let { currentDate } = this.state;
     let formatDate = new Date(currentDate).getTime();
-    this.getDataPatient(user, formatDate);
-  }
-  getDataPatient = async (user, formatDate) => {
     let res = await getAllPatientForDoctorService({
       doctorId: user.id,
       date: formatDate,
@@ -37,12 +44,47 @@ class ManagePatient extends Component {
         currentDate: date[0],
       },
       () => {
-        let { user } = this.props;
-        let { currentDate } = this.state;
-        let formatDate = new Date(currentDate).getTime();
-        this.getDataPatient(user, formatDate);
+        this.getDataPatient();
       }
     );
+  };
+  handleConfirmBooking = (item) => {
+    let data = {
+      doctorId: item.doctorId,
+      patientId: item.patientId,
+      email: item.patientData.email,
+      timeType: item.timeType,
+    };
+    this.setState({
+      isShowRemedyModal: true,
+      dataModal: data,
+    });
+  };
+  toggleModal = () => {
+    this.setState({
+      isShowRemedyModal: !this.state.isShowRemedyModal,
+    });
+  };
+  sendRemedy = async (data) => {
+    try {
+      let { dataModal } = this.state;
+      let res = await sendRemedyService({
+        doctorId: dataModal.doctorId,
+        patientId: dataModal.patientId,
+        timeType: dataModal.timeType,
+        email: data.email,
+      });
+      if (res && res.errCode === 0) {
+        toast.success("Confirm appointment successfully!");
+        this.getDataPatient();
+        this.toggleModal();
+      } else {
+        toast.error("Confirm appointment failed!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    console.log("this state", this.state);
   };
   render() {
     console.log("State", this.state);
@@ -90,9 +132,11 @@ class ManagePatient extends Component {
                         <td>{item.patientData.address}</td>
                         <td>{item.patientData.genderData.valueVi}</td>
                         <td>
-                          <button className="btn btn-primary">Xác nhận</button>
-                          <button className="btn btn-warning">
-                            Gửi hóa đơn
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => this.handleConfirmBooking(item)}
+                          >
+                            Xác nhận
                           </button>
                         </td>
                       </tr>
@@ -112,6 +156,12 @@ class ManagePatient extends Component {
             </tbody>
           </table>
         </div>
+        <RemedyModal
+          isShowModal={this.state.isShowRemedyModal}
+          dataModal={this.state.dataModal}
+          toggleModal={this.toggleModal}
+          sendRemedy={this.sendRemedy}
+        />
       </>
     );
   }
