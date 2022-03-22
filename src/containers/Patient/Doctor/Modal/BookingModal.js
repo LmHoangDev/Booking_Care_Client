@@ -148,7 +148,7 @@ class BookingModal extends Component {
     //   console.log("data from parent :", this.props.dataTime);
     let { dataTime } = this.props;
     let doctorId = dataTime && !_.isEmpty(dataTime) ? dataTime.doctorId : "";
-    console.log("State booking modal:", this.state);
+    // console.log("State booking modal:", this.state);
 
     return (
       <>

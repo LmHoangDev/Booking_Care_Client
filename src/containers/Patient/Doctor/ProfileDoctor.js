@@ -32,7 +32,13 @@ class ProfileDoctor extends Component {
     return result;
   };
   async componentDidUpdate(prevProps, prevState) {
-    if (prevProps.doctorId !== this.props.doctorId) {
+    if (this.props.language !== prevProps.language) {
+    }
+    if (this.props.doctorId !== prevProps.doctorId) {
+      let data = await this.getProfileDoctor(this.props.doctorId);
+      this.setState({
+        inforDoctor: data,
+      });
     }
   }
   showName = (data, language) => {
