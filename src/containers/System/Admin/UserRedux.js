@@ -167,7 +167,7 @@ class UserRedux extends Component {
   handleEditUserFromParent = (data) => {
     let imageBase64 = "";
     if (data.image) {
-      imageBase64 = new Buffer(data.image, "base64").toString("binary");
+      imageBase64 = Buffer.from(data.image, "base64").toString("binary");
     }
     this.setState({
       email: data.email,
@@ -191,7 +191,7 @@ class UserRedux extends Component {
     let positions = this.state.positionArr;
     let roles = this.state.roleArr;
 
-    let { language, isLoadingGender } = this.props;
+    let { language } = this.props;
 
     let {
       email,
@@ -440,7 +440,6 @@ const mapStateToProps = (state) => {
     gendersRedux: state.admin.genders,
     positionsRedux: state.admin.positions,
     rolesRedux: state.admin.roles,
-    isLoadingGender: state.admin.isLoadingGender,
     listUsers: state.admin.users,
   };
 };

@@ -6,10 +6,12 @@ import {
   getAllPatientForDoctorService,
   sendRemedyService,
 } from "../../../services/userService";
+
 import moment from "moment";
 import "./ManagePatient.scss";
 import RemedyModal from "./RemedyModal";
 import { toast } from "react-toastify";
+import Loading from "../../../components/Loading/Loading";
 
 class ManagePatient extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class ManagePatient extends Component {
       dataPatient: [],
       isShowRemedyModal: false,
       dataModal: "",
+      isLoading: false,
     };
   }
   async componentDidMount() {
@@ -54,6 +57,7 @@ class ManagePatient extends Component {
       patientId: item.patientId,
       email: item.patientData.email,
       timeType: item.timeType,
+      patientName: item.patientData.firstName,
     };
     this.setState({
       isShowRemedyModal: true,
@@ -68,11 +72,17 @@ class ManagePatient extends Component {
   sendRemedy = async (data) => {
     try {
       let { dataModal } = this.state;
+      this.setState({
+        isLoading: true,
+      });
       let res = await sendRemedyService({
         doctorId: dataModal.doctorId,
         patientId: dataModal.patientId,
         timeType: dataModal.timeType,
         email: data.email,
+        language: this.props.language,
+        image: data.image,
+        patientName: dataModal.patientName,
       });
       if (res && res.errCode === 0) {
         toast.success("Confirm appointment successfully!");
@@ -81,6 +91,9 @@ class ManagePatient extends Component {
       } else {
         toast.error("Confirm appointment failed!");
       }
+      this.setState({
+        isLoading: false,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -91,6 +104,7 @@ class ManagePatient extends Component {
     let { dataPatient } = this.state;
     return (
       <>
+        <Loading isLoading={this.state.isLoading} />
         <div className="container">
           <h2 className="title">
             <FormattedMessage id="manage-patient.title" />

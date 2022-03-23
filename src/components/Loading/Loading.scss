@@ -1,0 +1,12 @@
+.loading-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(143, 136, 136, 0.5);
+    z-index: 10000;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
