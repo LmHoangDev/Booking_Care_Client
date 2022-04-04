@@ -58,6 +58,7 @@
             "crud": "CRUD user",
             "crud-redux": "CRUD redux",
             "manage-clinic": "Quản lý phòng khám",
+            "create-clinic": "Thêm mới phòng khám",
             "clinic": "Phòng khám",
 
             "specialty": "Chuyên khoa",

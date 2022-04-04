@@ -80,7 +80,7 @@ class ManageSchedule extends Component {
     return (
       <>
         <div className="container">
-          <h2 className="title">Manage Clinic</h2>
+          <h2 className="title">Create Clinic</h2>
           <div className="row">
             <div className="col-6">
               <label htmlFor="name">Tên phòng khám</label>

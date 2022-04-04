@@ -12,6 +12,7 @@ import {
   postPatientBookingAppointmentService,
   getListSpecialtyService,
   getListClinicService,
+  deleteClinicService,
 } from "../../services/userService";
 
 import { toast } from "react-toastify";
@@ -394,3 +395,22 @@ export const savePatientBookingAppointmentSuccess = () => ({
 export const savePatientBookingAppointmentFailed = () => ({
   type: actionTypes.SAVE_BOOKING_APPOINTMENT_FAILED,
 });
+
+//delete-clinic-by-id
+
+export const deleteClinicById = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await deleteClinicService(data);
+      console.log("res", res);
+      if (res && res.errCode === 0) {
+        toast.success("Delete Clinic successfully");
+        await getListClinicService();
+      } else {
+        toast.error("Delete Clinic failed");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

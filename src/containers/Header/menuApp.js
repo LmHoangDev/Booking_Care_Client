@@ -25,6 +25,10 @@ export const adminMenu = [
         name: "menu.doctor.manage-clinic",
         link: "/doctor/manage-clinic",
       },
+      // {
+      //   name: "menu.doctor.manage-clinic",
+      //   link: "/system/clinic-list",
+      // },
 
       // {
       //   name: "menu.admin.manage-user",
@@ -48,8 +52,12 @@ export const adminMenu = [
     name: "menu.admin.clinic",
     menus: [
       {
-        name: "menu.admin.manage-clinic",
+        name: "menu.admin.create-clinic",
         link: "/system/clinic-manage",
+      },
+      {
+        name: "menu.admin.manage-clinic",
+        link: "/system/clinic-list",
       },
     ],
   },
