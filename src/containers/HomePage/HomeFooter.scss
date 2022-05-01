@@ -1,0 +1,52 @@
+.home-footer {
+    font-family: "Montserrat", sans-serif;
+    background-color: #efefef;
+    .logo-footer {
+        max-width: 200px;
+        margin-top: 50px;
+    }
+    .title-footer {
+        font-weight: bold;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+        li {
+        }
+    }
+    ul.list-social {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        margin-left: 100px;
+        li {
+            a {
+                display: block;
+                img {
+                    width: 50px;
+                }
+            }
+        }
+    }
+    .logo-sub {
+        width: 300px;
+        margin-left: 95px;
+    }
+    p.copy-right {
+        background-color: #64b9e5;
+        color: #fff;
+        margin-bottom: 0;
+        text-align: center;
+        padding: 20px 0;
+        font-size: 16px;
+    }
+    .support {
+        margin-top: 65px;
+        margin-left: 100px;
+        span {
+            font-weight: bold;
+        }
+    }
+}
