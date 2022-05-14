@@ -6,7 +6,9 @@
     background-color: $colormain;
     color: $common-text-color;
     height: 40px;
-    position: relative;
+    position: sticky;
+    top: 0;
+    left: 0;
     .btn-logout {
         color: $common-text-color;
         line-height: 40px;

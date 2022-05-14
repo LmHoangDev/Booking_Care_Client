@@ -80,7 +80,7 @@ class ManageSchedule extends Component {
     return (
       <>
         <div className="container">
-          <h2 className="title">Create Clinic</h2>
+          <h2 className="title">Thêm phòng khám</h2>
           <div className="row">
             <div className="col-6">
               <label htmlFor="name">Tên phòng khám</label>
@@ -137,7 +137,7 @@ class ManageSchedule extends Component {
             </div>
           </div>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary mb-5"
             onClick={() => this.handleSaveInfor()}
           >
             Tạo mới

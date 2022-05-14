@@ -1,5 +1,4 @@
 import { Component } from "react";
-
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { toast } from "react-toastify";
@@ -46,23 +45,24 @@ class ListClinic extends Component {
       );
     });
   };
-  componentDidUpdate(prevProps, prevState) {}
-  handleCreateNew = () => {
-    return this.props.history.push("/system/clinic-manage");
-  };
+  // componentDidUpdate(prevProps, prevState) {}
+  handleClick() {
+    console.log("Hello");
+  }
   render() {
     let { language } = this.props;
     let { listClinic } = this.state;
+    console.log("listClinic", listClinic);
 
     return (
       <>
         <div className="container">
-          <h2 className="title">Manage Clinic</h2>
+          <h2 className="title">Quản lý phòng khám</h2>
           <div className="row">
             <div className="col-6">
               <button
                 className="btn btn-primary"
-                onClick={this.handleCreateNew()}
+                onClick={() => this.handleClick()}
               >
                 Thêm mới
               </button>
