@@ -209,7 +209,7 @@ class UserRedux extends Component {
 
     return (
       <div className="container">
-        <div className="title">Manage users redux</div>
+        <div className="title">Quản lý người dùng</div>
 
         <form className="w-75 mx-auto" onSubmit={(e) => this.handleSaveUser(e)}>
           <div className="row mt-4">
