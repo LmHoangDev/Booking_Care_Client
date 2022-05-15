@@ -5,6 +5,7 @@ const initialState = {
   users: [],
   roles: [],
   positions: [],
+  clinics: [],
   isLoadingGender: false,
   topDoctors: [], //all-doctors-limit
   doctors: [], //all-doctors
@@ -134,6 +135,23 @@ const adminReducer = (state = initialState, action) => {
         ...state,
         allExtraInforDoctor: {},
       };
+    case actionTypes.FETCH_ALL_CLINICS_START:
+      return {
+        ...state,
+        isLoadingGender: true,
+      };
+    case actionTypes.FETCH_ALL_CLINICS_SUCCESS:
+      return {
+        ...state,
+        isLoadingGender: false,
+        clinics: action.data,
+      };
+    case actionTypes.FETCH_ALL_CLINICS_FAILED:
+      return {
+        ...state,
+        clinics: [],
+      };
+
     default:
       return state;
   }

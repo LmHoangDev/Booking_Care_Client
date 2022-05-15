@@ -100,6 +100,14 @@ const sendRemedyService = (data) => {
 const deleteClinicService = (id) => {
   return axios.post(`/api/delete-clinic-by-id`, id);
 };
+
+// 15-05-2022
+const putChangeActiveAccountService = (data) => {
+  return axios.post(`/api/auth/activeAccount`, data);
+};
+const updateClinicService = (data) => {
+  return axios.post(`/api/edit-clinic`, data);
+};
 export {
   handleLoginApi,
   getAllUsers,
@@ -126,4 +134,6 @@ export {
   getAllPatientForDoctorService,
   sendRemedyService,
   deleteClinicService,
+  putChangeActiveAccountService,
+  updateClinicService,
 };

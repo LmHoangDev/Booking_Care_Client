@@ -1,21 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { FormattedMessage } from "react-intl";
-import * as actions from "../../../store/actions";
-import {
-  languages,
-  CRUD_ACTIONS,
-  CommonUtils,
-  dateFormat,
-} from "../../../utils";
-import Select from "react-select";
-import DatePicker from "../../../components/Input/DatePicker";
-import moment from "moment";
-import FormattedDate from "../../../components/Formating/FormattedDate";
-import { toast } from "react-toastify";
-import { saveBulkCreateSchedule } from "../../../services/userService";
 import _ from "lodash";
+import React, { Component } from "react";
+import { FormattedMessage } from "react-intl";
+import { connect } from "react-redux";
+import Select from "react-select";
+import { toast } from "react-toastify";
+import DatePicker from "../../../components/Input/DatePicker";
+import { saveBulkCreateSchedule } from "../../../services/userService";
+import * as actions from "../../../store/actions";
+import { languages } from "../../../utils";
 class ManageSchedule extends Component {
   constructor(props) {
     super(props);

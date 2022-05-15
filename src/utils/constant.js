@@ -8,6 +8,7 @@ export const path = {
   DETAIL_SPECIALTY: "/detail-specialty/:id",
   DETAIL_CLINIC: "/detail-clinic/:id",
   VERIFY_EMAIL: "/verify-booking",
+  //ADD_NEW_ACCOUNT: "/system/crud-add-account",
 };
 
 export const languages = {

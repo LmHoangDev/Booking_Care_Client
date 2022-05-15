@@ -58,7 +58,7 @@ class ModalEditUser extends Component {
     copyState[name] = value;
     this.setState({ ...copyState });
   };
-  handleSumit = (e) => {
+  handleSubmit = (e) => {
     let isValid = this.checkValidInput();
     if (isValid) {
       this.props.editEditUser(this.state);
@@ -155,7 +155,7 @@ class ModalEditUser extends Component {
             color="primary"
             type="submit"
             className="px-3"
-            onClick={(e) => this.handleSumit(e)}
+            onClick={(e) => this.handleSubmit(e)}
           >
             Save changes
           </Button>

@@ -1,10 +1,12 @@
 import MarkdownIt from "markdown-it";
 import { Component } from "react";
+import Lightbox from "react-image-lightbox";
 import MdEditor from "react-markdown-editor-lite";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { postCreateNewClinicService } from "../../../services/userService";
 import { CommonUtils } from "../../../utils";
+import * as actions from "../../../store/actions";
 import "./ManageClinic.scss";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
@@ -18,22 +20,43 @@ class ManageSchedule extends Component {
       imageBase64: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
+      previewURL: "",
+      image: "",
+      isOpen: "",
     };
   }
   componentDidMount() {}
 
   componentDidUpdate(prevProps, prevState) {}
+  // handleChangeImage = async (e) => {
+  //   let data = e.target.files;
+  //   let file = data[0];
+  //   if (file) {
+  //     let base64 = await CommonUtils.getBase64(file);
+  //     //  let objectURL = URL.createObjectURL(file);
+  //     this.setState({
+  //       //previewURL: objectURL,
+  //       imageBase64: base64,
+  //     });
+  //   }
+  // };
   handleChangeImage = async (e) => {
     let data = e.target.files;
     let file = data[0];
     if (file) {
       let base64 = await CommonUtils.getBase64(file);
-      //  let objectURL = URL.createObjectURL(file);
+      let objectURL = URL.createObjectURL(file);
       this.setState({
-        //previewURL: objectURL,
+        previewURL: objectURL,
         imageBase64: base64,
       });
     }
+  };
+  openPreviewImage = () => {
+    if (!this.state.previewURL) return;
+    this.setState({
+      isOpen: true,
+    });
   };
   handleChangeInput = (e) => {
     let { name, value } = e.target;
@@ -103,10 +126,23 @@ class ManageSchedule extends Component {
                 id="image"
                 name="image"
                 className="form-control"
-                // hidden
+                hidden
                 onChange={(e) => this.handleChangeImage(e)}
-                // value={this.state.imageBase64}
               />
+              <div
+                className="preview-image"
+                style={{
+                  backgroundImage: `url(${this.state.previewURL})`,
+                }}
+                onClick={() => this.openPreviewImage()}
+              ></div>
+              {this.state.isOpen && (
+                <Lightbox
+                  mainSrc={this.state.previewURL}
+                  //style={{ zIndex: 9999 }}
+                  onCloseRequest={() => this.setState({ isOpen: false })}
+                />
+              )}
               {/* <div
                 className="preview-image"
                 style={{ backgroundImage: `url(${this.state.previewURL})` }}
@@ -155,7 +191,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    fetchAllClinicsStart: () => dispatch(actions.fetchAllClinicsStart()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageSchedule);

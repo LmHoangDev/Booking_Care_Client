@@ -27,6 +27,8 @@ import DetailDoctor from "./Patient/Doctor/DetailDoctor";
 import VerifyEmail from "./Patient/VerifyEmail";
 import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 import DetailClinic from "./Patient/Clinic/DetailClinic";
+import PageAddNewAccount from "./System/PageAddNewAccount";
+import ManageSchedule from "./System/Doctor/ManageSchedule";
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -65,10 +67,18 @@ class App extends Component {
                     path={path.SYSTEM}
                     component={userIsAuthenticated(System)}
                   />
+                  {/* <Route
+                    path={path.ADD_NEW_ACCOUNT}
+                    component={userIsAuthenticated(PageAddNewAccount)}
+                  /> */}
                   <Route
                     path="/doctor/"
                     component={userIsAuthenticated(Doctor)}
                   />
+                  {/* <Route
+                    path="/doctor/manage-schedule"
+                    component={userIsAuthenticated(ManageSchedule)}
+                  /> */}
                   <Route path={path.HOMEPAGE} component={HomePage} />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                   <Route

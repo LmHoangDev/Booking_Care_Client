@@ -27,7 +27,7 @@ class Login extends Component {
   };
   handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     this.setState({
       errorMessage: "",
     });

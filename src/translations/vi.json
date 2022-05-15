@@ -65,9 +65,11 @@
       "manage-specialty": "Quản lý chuyên khoa",
 
       "handbook": "Cẩm nang",
-      "manage-handbook": "Quản lý cẩm nang"
+      "manage-handbook": "Quản lý cẩm nang",
+      "create-user": "Thêm mới tài khoản"
     },
     "doctor": {
+      "manage-module": "Chức năng",
       "manage-schedule": "Quản lý kế hoạch khám bệnh",
       "manage-patient": "Quản lý bệnh nhân khám bệnh"
     }

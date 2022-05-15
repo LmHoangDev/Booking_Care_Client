@@ -6,6 +6,7 @@ import ManageDoctor from "../containers/System/Admin/ManageDoctor";
 import UserRedux from "../containers/System/Admin/UserRedux";
 import ListClinic from "../containers/System/Clinic/ListClinic";
 import ManageClinic from "../containers/System/Clinic/ManageClinic";
+import PageAddNewAccount from "../containers/System/PageAddNewAccount";
 import PostManage from "../containers/System/Post/PostManage";
 import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
 import UserManage from "../containers/System/UserManage";
@@ -28,6 +29,10 @@ class System extends Component {
               <Route
                 path="/system/specialty-manage"
                 component={ManageSpecialty}
+              />
+              <Route
+                path="/system/create-account"
+                component={PageAddNewAccount}
               />
               <Route path="/system/create-clinic" component={ManageClinic} />
               <Route path="/system/clinic-list" component={ListClinic} />

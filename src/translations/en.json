@@ -65,9 +65,11 @@
       "manage-specialty": "Manage Specialties",
 
       "handbook": "Handbook",
-      "manage-handbook": "Manage Handbooks"
+      "manage-handbook": "Manage Handbooks",
+      "create-user": "Create New Account"
     },
     "doctor": {
+      "manage-module": "Module",
       "manage-schedule": "Manage Doctor's Schedule",
       "manage-patient": "Manage Doctor's Patient"
     }

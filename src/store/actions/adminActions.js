@@ -13,6 +13,8 @@ import {
   getListSpecialtyService,
   getListClinicService,
   deleteClinicService,
+  putChangeActiveAccountService,
+  updateClinicService,
 } from "../../services/userService";
 
 import { toast } from "react-toastify";
@@ -412,5 +414,73 @@ export const deleteClinicById = (data) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const fetchChangeActiveAccount = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await putChangeActiveAccountService(data);
+      console.log("res", res);
+      if (res && res.errCode === 0) {
+        toast.success("Change active account successfully");
+        await dispatch(fetchAllUsersStart());
+        //dispatch(savePatientBookingAppointmentSuccess());
+      } else {
+        toast.error("Change active account failed");
+        //dispatch(savePatientBookingAppointmentFailed());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const fetchUpdateClinic = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await updateClinicService(data);
+      console.log("res", res);
+      if (res && res.message.errCode === 0) {
+        toast.success("Cập nhật phòng khám thành công!");
+        await dispatch(fetchAllClinicsStart());
+        //dispatch(savePatientBookingAppointmentSuccess());
+      } else {
+        toast.error("Cập nhật phòng khám thất bại!");
+        //dispatch(savePatientBookingAppointmentFailed());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+//get list
+export const fetchAllClinicsStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: actionTypes.FETCH_ALL_CLINICS_START });
+      let res = await getListClinicService();
+      // let res1 = await getTopDoctorHomeService(3);
+      console.log("getdoctor", res);
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllClinicsSuccess(res.data));
+      } else {
+        dispatch(fetchAllClinicsFailed());
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchAllClinicsFailed());
+    }
+  };
+};
+export const fetchAllClinicsSuccess = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_CLINICS_SUCCESS,
+    data,
+  };
+};
+export const fetchAllClinicsFailed = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_CLINICS_FAILED,
+    data,
   };
 };
