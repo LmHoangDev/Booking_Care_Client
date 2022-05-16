@@ -3,6 +3,8 @@ import { Table } from "antd";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { toast } from "react-toastify";
+import { deleteClinicService } from "../../../services/userService";
 import * as actions from "../../../store/actions";
 import "./ListClinic.scss";
 import ModalEditClinic from "./ModalEditClinic";
@@ -94,16 +96,13 @@ class ListClinic extends Component {
       //sorter: (a, b) => a.id - b.id,
       render: (text, record, index) => {
         //return <NavLink to={`/projectdetail/${record.id}`}>{text}</NavLink>;
-        let imageBase64 = "";
-        if (record.image) {
-          imageBase64 = Buffer.from(record.image, "base64").toString("binary");
-        }
+
         return (
           <>
             <img
-              src={imageBase64}
+              src={record.image}
               alt=""
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "70px", height: "50px" }}
             />
           </>
         );
@@ -126,7 +125,7 @@ class ListClinic extends Component {
             <button
               className="btn btn-danger"
               style={{ marginLeft: "10px" }}
-              // onClick={//() => this.handleDeleteUser(record)}
+              onClick={() => this.handleDeleteClinic(record)}
               // disabled={record.isActive === 0 ? true : false}
             >
               <DeleteOutlined />
@@ -136,6 +135,21 @@ class ListClinic extends Component {
       },
     },
   ];
+  handleDeleteClinic = async (item) => {
+    try {
+      let res = await deleteClinicService({ id: +item.id });
+      console.log("res", res);
+      if (res && res.message.errCode === 0) {
+        toast.success("Xoá phòng khám thành công!!");
+        await this.props.fetchAllClinicsStart();
+      } else {
+        toast.error("Xoá phòng khám thất bại!!");
+      }
+    } catch (error) {
+      toast.error(error);
+    }
+    // console.log(item.id);
+  };
   handleOpenModalEditClinic = (item) => {
     this.setState({
       isShowModal: true,

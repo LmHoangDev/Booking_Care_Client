@@ -15,6 +15,7 @@ import {
   deleteClinicService,
   putChangeActiveAccountService,
   updateClinicService,
+  updateSpecialtyService,
 } from "../../services/userService";
 
 import { toast } from "react-toastify";
@@ -453,7 +454,7 @@ export const fetchUpdateClinic = (data) => {
     }
   };
 };
-//get list
+//get list clinic
 export const fetchAllClinicsStart = () => {
   return async (dispatch, getState) => {
     try {
@@ -482,5 +483,56 @@ export const fetchAllClinicsFailed = (data) => {
   return {
     type: actionTypes.FETCH_ALL_CLINICS_FAILED,
     data,
+  };
+};
+
+//get list specialties
+export const fetchAllSpecialtiesStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: actionTypes.FETCH_ALL_CLINICS_START });
+      let res = await getListSpecialtyService("");
+
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllSpecialtiesSuccess(res.data));
+      } else {
+        dispatch(fetchAllSpecialtiesFailed());
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchAllSpecialtiesFailed());
+    }
+  };
+};
+export const fetchAllSpecialtiesSuccess = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_SPECIALTIES_SUCCESS,
+    data,
+  };
+};
+export const fetchAllSpecialtiesFailed = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_SPECIALTIES_FAILED,
+    data,
+  };
+};
+
+//update specialties for
+export const fetchUpdateSpecialty = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await updateSpecialtyService(data);
+      console.log("res", res);
+      if (res && res.message.errCode === 0) {
+        toast.success("Cập nhật chuyên khoa thành công!");
+        await dispatch(fetchAllSpecialtiesStart());
+        //dispatch(savePatientBookingAppointmentSuccess());
+      } else {
+        toast.error("Cập nhật chuyên khoa thất bại!");
+        //dispatch(savePatientBookingAppointmentFailed());
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 };

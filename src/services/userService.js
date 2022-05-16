@@ -108,6 +108,12 @@ const putChangeActiveAccountService = (data) => {
 const updateClinicService = (data) => {
   return axios.post(`/api/edit-clinic`, data);
 };
+const updateSpecialtyService = (data) => {
+  return axios.post(`/api/edit-specialty`, data);
+};
+const deleteSpecialtyService = (id) => {
+  return axios.post(`/api/delete-specialty-by-id`, id);
+};
 export {
   handleLoginApi,
   getAllUsers,
@@ -136,4 +142,6 @@ export {
   deleteClinicService,
   putChangeActiveAccountService,
   updateClinicService,
+  updateSpecialtyService,
+  deleteSpecialtyService,
 };

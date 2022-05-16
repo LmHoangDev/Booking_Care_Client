@@ -70,8 +70,12 @@ export const adminMenu = [
     name: "menu.admin.specialty",
     menus: [
       {
-        name: "menu.admin.manage-specialty",
+        name: "menu.admin.create-specialty",
         link: "/system/specialty-manage",
+      },
+      {
+        name: "menu.admin.manage-specialty",
+        link: "/system/specialty-list",
       },
     ],
   },

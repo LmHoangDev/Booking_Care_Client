@@ -6,6 +6,7 @@ import { CommonUtils } from "../../../utils";
 import { postCreateNewSpecialtyService } from "../../../services/userService";
 import "./ManageSpecialty.scss";
 import { toast } from "react-toastify";
+import { withRouter } from "react-router";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -56,12 +57,14 @@ class ManageSpecialty extends Component {
       console.log("res", res);
       if (res && res.errCode === 0) {
         toast.success("Create new specialty successfully");
+
         this.setState({
           name: "",
           imageBase64: "",
           descriptionHTML: "",
           descriptionMarkdown: "",
         });
+        this.props.history.push("/system/specialty-list");
       } else {
         toast.error("Create new specialty failed");
       }
@@ -77,7 +80,7 @@ class ManageSpecialty extends Component {
     return (
       <>
         <div className="container">
-          <div className="title">Manage Specialties</div>
+          <div className="title">Thêm mới chuyên khoa</div>
           <div className="row">
             <div className="col-6">
               <label htmlFor="name">Tên chuyên khoa</label>
@@ -142,4 +145,6 @@ const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageSpecialty);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ManageSpecialty)
+);

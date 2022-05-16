@@ -6,6 +6,7 @@ const initialState = {
   roles: [],
   positions: [],
   clinics: [],
+  specialties: [],
   isLoadingGender: false,
   topDoctors: [], //all-doctors-limit
   doctors: [], //all-doctors
@@ -150,6 +151,22 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         clinics: [],
+      };
+    case actionTypes.FETCH_ALL_SPECIALTIES_START:
+      return {
+        ...state,
+        isLoadingGender: true,
+      };
+    case actionTypes.FETCH_ALL_SPECIALTIES_SUCCESS:
+      return {
+        ...state,
+        isLoadingGender: false,
+        specialties: action.data,
+      };
+    case actionTypes.FETCH_ALL_SPECIALTIES_FAILED:
+      return {
+        ...state,
+        specialties: [],
       };
 
     default:
