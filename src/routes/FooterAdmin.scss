@@ -1,0 +1,16 @@
+.footer-admin-container {
+    text-align: center;
+    background-color: #0071ba;
+    color: white;
+    z-index: 9999;
+    position: "absolute";
+    bottom: 0;
+    width: 100%;
+    margin-top: 10px;
+
+    p {
+        padding: 20px;
+        font-size: 24px;
+        margin-bottom: 0;
+    }
+}

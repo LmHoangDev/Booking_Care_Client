@@ -592,3 +592,20 @@ export const fetchUpdatePost = (data) => {
     }
   };
 };
+// export const fetchInforDetailUser = (id) => {
+//   return async (dispatch, getState) => {
+//     try {
+//       // dispatch({ type: actionTypes.FETCH_ALL_USERS_START });
+//       let res = await getAllUsers(id);
+
+//       if (res && res.errCode === 0) {
+//         dispatch(fetchAllUsersSuccess(res.users.reverse()));
+//       } else {
+//         dispatch(fetchAllUsersFailed());
+//       }
+//     } catch (error) {
+//       console.log(error);
+//       dispatch(fetchAllUsersFailed());
+//     }
+//   };
+// };
