@@ -21,20 +21,6 @@ class ListClinic extends Component {
     };
   }
   async componentDidMount() {
-    // try {
-    //   let res = await getListClinicService();
-    //   if (res && res.errCode === 0) {
-    //     this.setState({
-    //       listClinic: res.data,
-    //     });
-    //   } else {
-    //     this.setState({
-    //       listClinic: [],
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
     this.props.fetchAllClinicsStart();
   }
   componentDidUpdate(prevProps, prevState) {

@@ -11,11 +11,12 @@ import {
   getExtraInforDoctorByIdService,
   postPatientBookingAppointmentService,
   getListSpecialtyService,
-  getListClinicService,
   deleteClinicService,
   putChangeActiveAccountService,
   updateClinicService,
   updateSpecialtyService,
+  getListPostService,
+  getListClinicService,
 } from "../../services/userService";
 
 import { toast } from "react-toastify";
@@ -534,5 +535,38 @@ export const fetchUpdateSpecialty = (data) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+//get list post
+//get list clinic
+export const fetchAllPostsStart = () => {
+  return async (dispatch, getState) => {
+    try {
+      dispatch({ type: actionTypes.FETCH_ALL_POSTS_START });
+      let res = await getListPostService();
+      // let res1 = await getTopDoctorHomeService(3);
+      console.log("getdoctor", res);
+      if (res && res.errCode === 0) {
+        dispatch(fetchAllPostsSuccess(res.data));
+      } else {
+        dispatch(fetchPostsFailed());
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(fetchPostsFailed());
+    }
+  };
+};
+export const fetchAllPostsSuccess = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_POSTS_SUCCESS,
+    data,
+  };
+};
+export const fetchPostsFailed = (data) => {
+  return {
+    type: actionTypes.FETCH_ALL_POSTS_FAILED,
+    data,
   };
 };

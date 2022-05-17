@@ -66,7 +66,10 @@
 
       "handbook": "Cẩm nang",
       "manage-handbook": "Quản lý cẩm nang",
-      "create-user": "Thêm mới tài khoản"
+      "create-user": "Thêm mới tài khoản",
+      "post": "Bài viết",
+      "create-post": "Thêm mới bài viết",
+      "manage-post": "Quản lý bài viết"
     },
     "doctor": {
       "manage-module": "Chức năng",

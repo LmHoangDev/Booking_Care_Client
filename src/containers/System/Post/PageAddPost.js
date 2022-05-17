@@ -4,28 +4,46 @@ import Lightbox from "react-image-lightbox";
 import MdEditor from "react-markdown-editor-lite";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { postCreateNewClinicService } from "../../../services/userService";
+import {
+  getAllCodeService,
+  postCreateNewClinicService,
+  postCreateNewPostService,
+} from "../../../services/userService";
 import { CommonUtils } from "../../../utils";
 import * as actions from "../../../store/actions";
-import "./ManageClinic.scss";
+import { withRouter } from "react-router";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
-class ManageClinic extends Component {
+class PageAddPost extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      address: "",
-      imageBase64: "",
+      title: "",
       descriptionHTML: "",
       descriptionMarkdown: "",
       previewURL: "",
+      type: "",
       image: "",
       isOpen: "",
+      listPostType: [],
     };
   }
-  componentDidMount() {}
+  async componentDidMount() {
+    try {
+      let resPost = await getAllCodeService("POST");
+      // console.log("res", res, resProvince);
+      if (resPost && resPost.errCode === 0) {
+        this.setState({ listPostType: resPost.data });
+      } else {
+        this.setState({
+          listPostType: [],
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {}
   // handleChangeImage = async (e) => {
@@ -48,7 +66,7 @@ class ManageClinic extends Component {
       let objectURL = URL.createObjectURL(file);
       this.setState({
         previewURL: objectURL,
-        imageBase64: base64,
+        image: base64,
       });
     }
   };
@@ -76,47 +94,74 @@ class ManageClinic extends Component {
 
   handleSaveInfor = async () => {
     try {
-      let res = await postCreateNewClinicService(this.state);
+      let res = await postCreateNewPostService(this.state);
       console.log("res", res);
       if (res && res.errCode === 0) {
-        toast.success("Create new clinic successfully");
+        toast.success("Create new post successfully");
         this.setState({
-          name: "",
-          address: "",
-          imageBase64: "",
+          title: "",
           descriptionHTML: "",
           descriptionMarkdown: "",
+          previewURL: "",
+          type: "",
+          image: "",
         });
+        this.props.history.push("/system/post-list");
       } else {
-        toast.error("Create new clinic failed");
+        toast.error("Create new post failed");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Create new clinic failed");
+      toast.error("Create new post failed");
     }
   };
-
+  onChangePostType = (e) => {
+    console.log(e.target.value);
+    this.setState({
+      type: e.target.value,
+    });
+  };
   render() {
     console.log("State", this.state);
-    let { language } = this.props;
+    // let { language } = this.props;
 
     return (
       <>
         <div className="container">
-          <h2 className="title">Thêm phòng khám</h2>
+          <h2 className="title">Thêm bài viết</h2>
           <div className="row">
-            <div className="col-6">
-              <label htmlFor="name">Tên phòng khám</label>
+            <div className="col-12">
+              <label htmlFor="name">Tên bài viết</label>
               <input
                 type="text"
                 className="form-control"
-                name="name"
-                placeholder="Tên phòng khám"
+                name="title"
+                placeholder="Tên bài viết"
                 onChange={(e) => this.handleChangeInput(e)}
-                value={this.state.name}
+                value={this.state.title}
               />
             </div>
-            <div className="col-6">
+            <div className="col-6 mt-4">
+              <label htmlFor="name">Loại bài viết</label>
+              <select
+                className="form-select form-select-sm"
+                id="type"
+                onChange={(e) => this.onChangePostType(e)}
+                value={this.state.type}
+              >
+                <option value="" selected>
+                  --Chọn loại--
+                </option>
+                {this.state.listPostType?.map((item, index) => {
+                  return (
+                    <option key={index} value={item.keyMap}>
+                      {item.valueVi}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="col-6 mt-4">
               <label htmlFor="image" className="label-upload">
                 Hình ảnh
                 <i className="fas fa-upload ml-2"></i>
@@ -143,23 +188,8 @@ class ManageClinic extends Component {
                   onCloseRequest={() => this.setState({ isOpen: false })}
                 />
               )}
-              {/* <div
-                className="preview-image"
-                style={{ backgroundImage: `url(${this.state.previewURL})` }}
-                onClick={() => this.openPreviewImage()}
-              ></div> */}
             </div>
-            <div className="col-6">
-              <label htmlFor="name">Địa chỉ phòng khám</label>
-              <input
-                type="text"
-                className="form-control"
-                name="address"
-                placeholder="Địa chỉ phòng khám"
-                onChange={(e) => this.handleChangeInput(e)}
-                value={this.state.address}
-              />
-            </div>
+
             <div className="col-12 mt-3">
               <label htmlFor="description">Mô tả</label>
               <MdEditor
@@ -196,4 +226,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageClinic);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PageAddPost)
+);

@@ -7,6 +7,7 @@ import UserRedux from "../containers/System/Admin/UserRedux";
 import ListClinic from "../containers/System/Clinic/ListClinic";
 import ManageClinic from "../containers/System/Clinic/ManageClinic";
 import PageAddNewAccount from "../containers/System/PageAddNewAccount";
+import PageAddPost from "../containers/System/Post/PageAddPost";
 import PostManage from "../containers/System/Post/PostManage";
 import ListSpecialty from "../containers/System/Specialty/ListSpecialty";
 import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
@@ -36,9 +37,17 @@ class System extends Component {
                 path="/system/create-account"
                 component={PageAddNewAccount}
               />
+
+              <Route
+                path="/system/specialty-manage"
+                component={ManageSpecialty}
+              />
+              <Route path="/system/post-list" component={PostManage} />
+              <Route path="/system/create-post" component={PageAddPost} />
+
               <Route path="/system/create-clinic" component={ManageClinic} />
               <Route path="/system/clinic-list" component={ListClinic} />
-              <Route path="/system/handbook-manage" component={PostManage} />
+              {/* <Route path="/system/handbook-manage" component={PostManage} /> */}
               <Route
                 component={() => {
                   return <Redirect to={systemMenuPath} />;

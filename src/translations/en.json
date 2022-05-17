@@ -67,7 +67,10 @@
 
       "handbook": "Handbook",
       "manage-handbook": "Manage Handbooks",
-      "create-user": "Create New Account"
+      "create-user": "Create New Account",
+      "post": "Posts",
+      "create-post": "Create new post",
+      "manage-post": "Manage Posts"
     },
     "doctor": {
       "manage-module": "Module",

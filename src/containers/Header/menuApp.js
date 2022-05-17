@@ -80,15 +80,29 @@ export const adminMenu = [
     ],
   },
   {
-    //quan ly cam nang
-    name: "menu.admin.handbook",
+    //quan ly bai viet
+    name: "menu.admin.post",
     menus: [
       {
-        name: "menu.admin.manage-handbook",
-        link: "/system/handbook-manage",
+        name: "menu.admin.create-post",
+        link: "/system/create-post",
+      },
+      {
+        name: "menu.admin.manage-post",
+        link: "/system/post-list",
       },
     ],
   },
+  // {
+  //   //quan ly cam nang
+  //   name: "menu.admin.handbook",
+  //   menus: [
+  //     {
+  //       name: "menu.admin.manage-handbook",
+  //       link: "/system/handbook-manage",
+  //     },
+  //   ],
+  // },
 ];
 export const doctorMenu = [
   {
