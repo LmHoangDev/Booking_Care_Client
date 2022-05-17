@@ -36,9 +36,10 @@ class Login extends Component {
         this.state.username,
         this.state.password
       );
+      console.log("result: ", result);
       if (result && result.errCode !== 0) {
         this.setState({
-          errorMessage: result.message,
+          errorMessage: result.errMessage,
         });
       }
       if (result && result.errCode === 0) {
@@ -100,7 +101,7 @@ class Login extends Component {
                 onClick={() => this.handleChangeTypePassword()}
               ></i>
             </div>
-            <div className="col-12 form-group text-danger">
+            <div className="col-12 form-group text-danger text-center fw-bold">
               {this.state.errorMessage}
             </div>
             <div className="col-12 form-group">
@@ -112,11 +113,11 @@ class Login extends Component {
                 Login
               </button>
             </div>
-            <div className="col-12 form-group text-center">
+            {/* <div className="col-12 form-group text-center">
               <a href="#" className="text-danger">
                 Forgot your password?
               </a>
-            </div>
+            </div> */}
             <div className="col-12 form-group text-center ">
               <div className="form-control border-0 mb-2">
                 <span className="font-weight-bold">Or login with</span>

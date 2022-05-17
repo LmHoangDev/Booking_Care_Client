@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { deleteClinicService } from "../../../services/userService";
 import * as actions from "../../../store/actions";
 import "./ListClinic.scss";
+import ModalDeleteClinic from "./ModalDeleteClinic";
 import ModalEditClinic from "./ModalEditClinic";
 
 class ListClinic extends Component {
@@ -18,6 +19,7 @@ class ListClinic extends Component {
       sortedInfo: null,
       isShowModal: false,
       clinicInfor: {},
+      isShowModalDelete: false,
     };
   }
   async componentDidMount() {
@@ -33,6 +35,12 @@ class ListClinic extends Component {
   toggleModal = () => {
     this.setState({
       isShowModal: !this.state.isShowModal,
+      //userInfor: this.state.userInfor,
+    });
+  };
+  toggleModalDelete = () => {
+    this.setState({
+      isShowModalDelete: !this.state.isShowModalDelete,
       //userInfor: this.state.userInfor,
     });
   };
@@ -111,7 +119,7 @@ class ListClinic extends Component {
             <button
               className="btn btn-danger"
               style={{ marginLeft: "10px" }}
-              onClick={() => this.handleDeleteClinic(record)}
+              onClick={() => this.handleOpenModalDeletePost(record)}
               // disabled={record.isActive === 0 ? true : false}
             >
               <DeleteOutlined />
@@ -121,24 +129,16 @@ class ListClinic extends Component {
       },
     },
   ];
-  handleDeleteClinic = async (item) => {
-    try {
-      let res = await deleteClinicService({ id: +item.id });
-      console.log("res", res);
-      if (res && res.message.errCode === 0) {
-        toast.success("Xoá phòng khám thành công!!");
-        await this.props.fetchAllClinicsStart();
-      } else {
-        toast.error("Xoá phòng khám thất bại!!");
-      }
-    } catch (error) {
-      toast.error(error);
-    }
-    // console.log(item.id);
-  };
+
   handleOpenModalEditClinic = (item) => {
     this.setState({
       isShowModal: true,
+      clinicInfor: item,
+    });
+  };
+  handleOpenModalDeletePost = (item) => {
+    this.setState({
+      isShowModalDelete: true,
       clinicInfor: item,
     });
   };
@@ -181,6 +181,11 @@ class ListClinic extends Component {
             <ModalEditClinic
               isShowModel={this.state.isShowModal}
               toggleModal={this.toggleModal}
+              dataFormParent={this.state.clinicInfor}
+            />{" "}
+            <ModalDeleteClinic
+              isShowModelDelete={this.state.isShowModalDelete}
+              toggleModalDelete={this.toggleModalDelete}
               dataFormParent={this.state.clinicInfor}
             />
             <Table

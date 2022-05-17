@@ -17,6 +17,7 @@ import {
   updateSpecialtyService,
   getListPostService,
   getListClinicService,
+  updatePostService,
 } from "../../services/userService";
 
 import { toast } from "react-toastify";
@@ -568,5 +569,26 @@ export const fetchPostsFailed = (data) => {
   return {
     type: actionTypes.FETCH_ALL_POSTS_FAILED,
     data,
+  };
+};
+
+//update specialties for
+export const fetchUpdatePost = (data) => {
+  return async (dispatch, getState) => {
+    try {
+      let res = await updatePostService(data);
+      //console.log("res", res);
+      if (res && res.errCode === 0) {
+        toast.success("Cập nhật bài viết thành công!");
+        await dispatch(fetchAllPostsStart());
+        //dispatch(savePatientBookingAppointmentSuccess());
+      } else {
+        toast.error("Cập nhật bài viết thất bại!");
+        //dispatch(savePatientBookingAppointmentFailed());
+      }
+    } catch (error) {
+      //console.log(error);
+      toast.error("Cập nhật bài viết thất bại!");
+    }
   };
 };

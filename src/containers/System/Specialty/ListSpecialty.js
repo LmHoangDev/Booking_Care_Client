@@ -13,6 +13,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import { withRouter } from "react-router";
 import ModalEditSpecialty from "./ModalEditSpecialty";
+import ModalDeleteSpecialty from "./ModalDeleteSpecialty";
 
 const mdParser = new MarkdownIt(/* Markdown-it options */);
 
@@ -25,6 +26,7 @@ class ListSpecialty extends Component {
       sortedInfo: null,
       isShowModal: false,
       specialtyInfor: {},
+      isShowModalDelete: false,
     };
   }
   columns = [
@@ -84,7 +86,7 @@ class ListSpecialty extends Component {
             <button
               className="btn btn-danger"
               style={{ marginLeft: "10px" }}
-              onClick={() => this.handleDeleteSpecialty(record)}
+              onClick={() => this.handleOpenModalDeletePost(record)}
               // disabled={record.isActive === 0 ? true : false}
             >
               <DeleteOutlined />
@@ -97,7 +99,12 @@ class ListSpecialty extends Component {
   componentDidMount() {
     this.props.fetchAllSpecialtiesStart();
   }
-
+  handleOpenModalDeletePost = (item) => {
+    this.setState({
+      isShowModalDelete: true,
+      specialtyInfor: item,
+    });
+  };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.listSpecialties !== this.props.listSpecialties) {
       this.setState({
@@ -136,21 +143,26 @@ class ListSpecialty extends Component {
     });
   };
 
-  handleDeleteSpecialty = async (item) => {
-    try {
-      let res = await deleteSpecialtyService({ id: +item.id });
-      //console.log("res", res);
-      if (res && res.message.errCode === 0) {
-        toast.success("Xoá chuyên khoa thành công!!");
-        await this.props.fetchAllSpecialtiesStart();
-      } else {
-        toast.error("Xoá chuyên khoa thất bại!!");
-      }
-    } catch (error) {
-      toast.error(error);
-    }
+  // handleDeleteSpecialty = async (item) => {
+  //   try {
+  //     let res = await deleteSpecialtyService({ id: +item.id });
+  //     //console.log("res", res);
+  //     if (res && res.message.errCode === 0) {
+  //       toast.success("Xoá chuyên khoa thành công!!");
+  //       await this.props.fetchAllSpecialtiesStart();
+  //     } else {
+  //       toast.error("Xoá chuyên khoa thất bại!!");
+  //     }
+  //   } catch (error) {
+  //     toast.error(error);
+  //   }
+  // };
+  toggleModalDelete = () => {
+    this.setState({
+      isShowModalDelete: !this.state.isShowModalDelete,
+      //userInfor: this.state.userInfor,
+    });
   };
-
   render() {
     //console.log("State", this.state);
     let { specialtiesRedux } = this.state;
@@ -169,6 +181,11 @@ class ListSpecialty extends Component {
             <ModalEditSpecialty
               isShowModel={this.state.isShowModal}
               toggleModal={this.toggleModal}
+              dataFormParent={this.state.specialtyInfor}
+            />
+            <ModalDeleteSpecialty
+              isShowModelDelete={this.state.isShowModalDelete}
+              toggleModalDelete={this.toggleModalDelete}
               dataFormParent={this.state.specialtyInfor}
             />
             <Table

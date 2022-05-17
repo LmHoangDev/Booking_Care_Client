@@ -12,7 +12,7 @@ import PostManage from "../containers/System/Post/PostManage";
 import ListSpecialty from "../containers/System/Specialty/ListSpecialty";
 import ManageSpecialty from "../containers/System/Specialty/ManageSpecialty";
 import UserManage from "../containers/System/UserManage";
-
+import HomeManage from "../containers/System/HomeManage";
 class System extends Component {
   render() {
     const { systemMenuPath, isLoggedIn } = this.props;
@@ -43,6 +43,7 @@ class System extends Component {
                 component={ManageSpecialty}
               />
               <Route path="/system/post-list" component={PostManage} />
+              <Route path="/system/home-manage" component={HomeManage} />
               <Route path="/system/create-post" component={PageAddPost} />
 
               <Route path="/system/create-clinic" component={ManageClinic} />

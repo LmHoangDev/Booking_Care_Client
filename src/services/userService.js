@@ -111,6 +111,9 @@ const updateClinicService = (data) => {
 const updateSpecialtyService = (data) => {
   return axios.post(`/api/edit-specialty`, data);
 };
+const updatePostService = (data) => {
+  return axios.post(`/api/update-post`, data);
+};
 const deleteSpecialtyService = (id) => {
   return axios.post(`/api/delete-specialty-by-id`, id);
 };
@@ -121,6 +124,9 @@ const getListPostService = () => {
 };
 const postCreateNewPostService = (data) => {
   return axios.post(`/api/create-new-post`, data);
+};
+const deletePostService = (id) => {
+  return axios.post(`/api/delete-post-by-id`, id);
 };
 export {
   handleLoginApi,
@@ -154,4 +160,6 @@ export {
   deleteSpecialtyService,
   getListPostService,
   postCreateNewPostService,
+  updatePostService,
+  deletePostService,
 };

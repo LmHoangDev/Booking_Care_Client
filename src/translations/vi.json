@@ -69,7 +69,8 @@
       "create-user": "Thêm mới tài khoản",
       "post": "Bài viết",
       "create-post": "Thêm mới bài viết",
-      "manage-post": "Quản lý bài viết"
+      "manage-post": "Quản lý bài viết",
+      "home-manage": "Trang quản trị"
     },
     "doctor": {
       "manage-module": "Chức năng",

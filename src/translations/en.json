@@ -70,7 +70,8 @@
       "create-user": "Create New Account",
       "post": "Posts",
       "create-post": "Create new post",
-      "manage-post": "Manage Posts"
+      "manage-post": "Manage Posts",
+      "home-manage": "Home"
     },
     "doctor": {
       "manage-module": "Module",

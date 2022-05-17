@@ -4,6 +4,8 @@ import { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import * as actions from "../../../store/actions";
+import ModalDeletePost from "./ModalDeletePost";
+import ModalEditPost from "./ModalEditPost";
 import "./PostManage.scss";
 class PostManage extends Component {
   constructor(props) {
@@ -13,6 +15,7 @@ class PostManage extends Component {
       filteredInfo: null,
       sortedInfo: null,
       isShowModal: false,
+      isShowModalDelete: false,
       postInfor: {},
     };
   }
@@ -48,6 +51,21 @@ class PostManage extends Component {
       sortDirections: ["descend", "ascend"],
     },
     {
+      title: "Loại bài viết",
+      dataIndex: "type",
+      render: (text, record, index) => {
+        return (
+          <>
+            {record.type === "PS1" ? (
+              <span>Cẩm nang</span>
+            ) : (
+              <span>Thường</span>
+            )}
+          </>
+        );
+      },
+    },
+    {
       title: "Hình ảnh",
       dataIndex: "image",
       //key: "address",
@@ -81,7 +99,7 @@ class PostManage extends Component {
             <button
               className="btn btn-danger"
               style={{ marginLeft: "10px" }}
-              onClick={() => this.handleDeletePost(record)}
+              onClick={() => this.handleOpenModalDeletePost(record)}
               // disabled={record.isActive === 0 ? true : false}
             >
               <DeleteOutlined />
@@ -91,13 +109,34 @@ class PostManage extends Component {
       },
     },
   ];
-
+  toggleModal = () => {
+    this.setState({
+      isShowModal: !this.state.isShowModal,
+      //userInfor: this.state.userInfor,
+    });
+  };
+  toggleModalDelete = () => {
+    this.setState({
+      isShowModalDelete: !this.state.isShowModalDelete,
+      //userInfor: this.state.userInfor,
+    });
+  };
   handleAddNewPost = () => {
     this.props.history.push("/system/create-post");
   };
   handleDeletePost = (item) => {};
-  handleOpenModalEditPost = (item) => {};
-
+  handleOpenModalEditPost = (item) => {
+    this.setState({
+      isShowModal: true,
+      postInfor: item,
+    });
+  };
+  handleOpenModalDeletePost = (item) => {
+    this.setState({
+      isShowModalDelete: true,
+      postInfor: item,
+    });
+  };
   clearFilters = () => {
     this.setState({ filteredInfo: null });
   };
@@ -131,6 +170,16 @@ class PostManage extends Component {
             <i className="fas fa-plus"></i> Thêm mới
           </button>
         </div>
+        <ModalEditPost
+          isShowModel={this.state.isShowModal}
+          toggleModal={this.toggleModal}
+          dataFormParent={this.state.postInfor}
+        />
+        <ModalDeletePost
+          isShowModelDelete={this.state.isShowModalDelete}
+          toggleModalDelete={this.toggleModalDelete}
+          dataFormParent={this.state.postInfor}
+        />
         <Table
           columns={this.columns}
           rowKey={"id"}
