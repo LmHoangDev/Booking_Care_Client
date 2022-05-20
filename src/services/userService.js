@@ -131,6 +131,12 @@ const deletePostService = (id) => {
 const changePasswordService = (data) => {
   return axios.post(`/api/auth/changePassword`, data);
 };
+const changeInforUserService = (data) => {
+  return axios.post(`/api/auth/changeInforUser`, data);
+};
+const getDetailPostByIdService = (data) => {
+  return axios.get(`/api/get-details-post-by-id?id=${data}`);
+};
 export {
   handleLoginApi,
   getAllUsers,
@@ -166,4 +172,6 @@ export {
   updatePostService,
   deletePostService,
   changePasswordService,
+  changeInforUserService,
+  getDetailPostByIdService,
 };

@@ -70,7 +70,8 @@
       "post": "Bài viết",
       "create-post": "Thêm mới bài viết",
       "manage-post": "Quản lý bài viết",
-      "home-manage": "Trang quản trị"
+      "home-manage": "Trang quản trị",
+      "schedule": "Lịch khám"
     },
     "doctor": {
       "manage-module": "Chức năng",
@@ -177,7 +178,7 @@
     "search": "Tìm kiếm",
     "popular-specialty": "Chuyên khoa phổ biến",
     "outstanding-medical-facility": "Cơ sở y tế nổi bật",
-    "handbook": "Cẩm nang",
+    "handbook": "Bài viết",
     "media-booking-care": "Truyền thông nói về BookingCare",
     "all-posts": "Tất cả bài viết"
   },

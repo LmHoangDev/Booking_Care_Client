@@ -4,7 +4,10 @@ import "react-markdown-editor-lite/lib/index.css";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { toast } from "react-toastify";
-import { getAllUsers } from "../../services/userService";
+import {
+  changeInforUserService,
+  getAllUsers,
+} from "../../services/userService";
 
 import * as actions from "../../store/actions";
 import { CommonUtils } from "../../utils";
@@ -48,6 +51,7 @@ class ChangeInforPersonal extends Component {
       } catch (error) {
         console.log(error);
       }
+      await this.props.fetchGenderStart();
     }
   }
   async componentDidUpdate(prevProps, prevState) {
@@ -83,16 +87,43 @@ class ChangeInforPersonal extends Component {
       });
     }
   };
-  handleSubmit = async () => {};
-  toBase64 = (arr) => {
-    //arr = new Uint8Array(arr) if it's an ArrayBuffer
-    return btoa(
-      arr.reduce((data, byte) => data + String.fromCharCode(byte), "")
-    );
+  handleSubmit = async () => {
+    console.log("state", this.state);
+    try {
+      let res = await changeInforUserService({
+        id: this.state.userInfoRedux.id,
+        address: this.state.address,
+        gender: this.state.gender,
+        phoneNumber: this.state.phoneNumber,
+      });
+      if (res && res.errCode === 0) {
+        toast.success("Cập nhật thông tin thành công!");
+        await this.props.processLogout();
+        this.setState({
+          userInfoRedux: {},
+          email: "",
+          address: "",
+          gender: "",
+          phoneNumber: "",
+          image: "",
+          userDetailInfor: {},
+        });
+      } else {
+        toast.error("Cập nhật thông tin thất bại!");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Cập nhật thông tin thất bại!");
+    }
   };
 
+  onChangeRadio = (e) => {
+    this.setState({
+      gender: e.currentTarget.value,
+    });
+  };
   render() {
-    console.log("User login", this.state.image);
+    //console.log("User login", this.state);
     // console.log("State", this.state);
     return (
       <div className="container mt-5">
@@ -107,7 +138,6 @@ class ChangeInforPersonal extends Component {
                 type="email"
                 name="email"
                 className="form-control"
-                placeholder
                 // onChange={(e) => this.handleChangeInput(e, "email")}
                 value={this.state.email}
                 disabled
@@ -122,7 +152,6 @@ class ChangeInforPersonal extends Component {
                 type="address"
                 name="address"
                 className="form-control"
-                placeholder=""
                 onChange={(e) => this.handleChangeInput(e, "address")}
                 value={this.state.address}
               />
@@ -131,14 +160,20 @@ class ChangeInforPersonal extends Component {
               <label htmlFor="gender">Giới tính</label>
             </div>
             <div className="col-6 mb-3">
-              <input
-                type="gender"
-                name="gender"
-                className="form-control"
-                placeholder=""
-                onChange={(e) => this.handleChangeInput(e, "gender")}
-                value={this.state.gender}
-              />
+              {this.props.genders?.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <input
+                      type="radio"
+                      name="gender"
+                      value={item.keyMap}
+                      checked={this.state.gender === item.keyMap}
+                      onChange={this.onChangeRadio}
+                    />
+                    {item.valueVi}
+                  </div>
+                );
+              })}
             </div>
             <div className="col-6">
               <label htmlFor="password">Số điện thoại</label>
@@ -148,7 +183,6 @@ class ChangeInforPersonal extends Component {
                 type="text"
                 name="phoneNumber"
                 className="form-control"
-                placeholder=""
                 onChange={(e) => this.handleChangeInput(e, "phoneNumber")}
                 value={this.state.phoneNumber}
               />
@@ -179,11 +213,15 @@ const mapStateToProps = (state) => {
   return {
     listUsers: state.admin.users,
     userInfo: state.user.userInfo,
+    genders: state.admin.genders,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return { processLogout: () => dispatch(actions.processLogout()) };
+  return {
+    processLogout: () => dispatch(actions.processLogout()),
+    fetchGenderStart: () => dispatch(actions.fetchGenderStart()),
+  };
 };
 
 export default withRouter(

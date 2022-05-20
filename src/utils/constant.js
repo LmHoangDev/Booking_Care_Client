@@ -6,8 +6,13 @@ export const path = {
   SYSTEM: "/system",
   DETAIL_DOCTOR: "/detail-doctor/:id",
   DETAIL_SPECIALTY: "/detail-specialty/:id",
+  DETAIL_POST: "/detail-post/:id",
   DETAIL_CLINIC: "/detail-clinic/:id",
   VERIFY_EMAIL: "/verify-booking",
+  HOME_LIST_CLINIC: "/home-list-clinic",
+  HOME_LIST_DOCTOR: "/home-list-doctor",
+  HOME_LIST_SPECIALTY: "/home-list-specialty",
+  HOME_LIST_POST: "/home-list-post",
   //ADD_NEW_ACCOUNT: "/system/crud-add-account",
 };
 

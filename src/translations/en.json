@@ -71,7 +71,8 @@
       "post": "Posts",
       "create-post": "Create new post",
       "manage-post": "Manage Posts",
-      "home-manage": "Home"
+      "home-manage": "Home",
+      "schedule": "Manage schedules"
     },
     "doctor": {
       "manage-module": "Module",

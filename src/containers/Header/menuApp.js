@@ -96,6 +96,15 @@ export const adminMenu = [
       },
     ],
   },
+  {
+    name: "menu.admin.schedule",
+    menus: [
+      {
+        name: "menu.doctor.manage-schedule",
+        link: "/system/manage-schedule",
+      },
+    ],
+  },
   // {
   //   //quan ly cam nang
   //   name: "menu.admin.handbook",
@@ -115,10 +124,10 @@ export const doctorMenu = [
         name: "menu.admin.home-manage",
         link: "/system/home-manage",
       },
-      {
-        name: "menu.doctor.manage-schedule",
-        link: "/doctor/manage-schedule",
-      },
+      // {
+      //   name: "menu.doctor.manage-schedule",
+      //   link: "/doctor/manage-schedule-detail",
+      // },
       {
         name: "menu.doctor.manage-patient",
         link: "/doctor/manage-patient",

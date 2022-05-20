@@ -30,12 +30,17 @@ class HomeHeader extends Component {
                 className="col-3 header-left"
                 onClick={() => this.handleGoBackHome()}
               >
-                <a href="#">
+                {/* <a href="#">
                   <i className="fa fa-bars"></i>
-                </a>
+                </a> */}
               </div>
               <div className="col-7 header-center">
-                <div className="header-center-item">
+                <div
+                  className="header-center-item"
+                  onClick={() =>
+                    this.props.history.push("/home-list-specialty")
+                  }
+                >
                   <a href="#">
                     <b>
                       <FormattedMessage id="homeheader.speciality" />
@@ -46,18 +51,24 @@ class HomeHeader extends Component {
                     <FormattedMessage id="homeheader.searchdoctor" />
                   </a>
                 </div>
-                <div className="header-center-item">
+                <div
+                  className="header-center-item"
+                  onClick={() => this.props.history.push("/home-list-clinic")}
+                >
                   <a href="#">
                     <b>
                       <FormattedMessage id="homeheader.heath-facility" />
                     </b>
                   </a>
                   <br />
-                  <a href="#" className="detail">
+                  <a className="detail">
                     <FormattedMessage id="homeheader.select-room" />
                   </a>
                 </div>
-                <div className="header-center-item">
+                <div
+                  className="header-center-item"
+                  onClick={() => this.props.history.push("/home-list-doctor")}
+                >
                   <a href="#">
                     <b>
                       {" "}
@@ -69,16 +80,16 @@ class HomeHeader extends Component {
                     <FormattedMessage id="homeheader.seclect-doctor" />
                   </a>
                 </div>
-                <div className="header-center-item">
+                <div
+                  className="header-center-item"
+                  onClick={() => this.props.history.push("/home-list-post")}
+                >
                   <a href="#">
-                    <b>
-                      {" "}
-                      <FormattedMessage id="homeheader.fee" />
-                    </b>
+                    <b>Bài viết</b>
                   </a>
                   <br />
                   <a href="#" className="detail">
-                    <FormattedMessage id="homeheader.check-health" />
+                    Chọn bài viết nổi bật
                   </a>
                 </div>
               </div>
@@ -131,7 +142,7 @@ class HomeHeader extends Component {
               <i className="fa fa-search"></i>
               <input type="text" placeholder="Search" />
             </div>
-            <div className="banner-options">
+            {/* <div className="banner-options">
               <ul className="mt-5 container">
                 <li>
                   <div
@@ -215,7 +226,7 @@ class HomeHeader extends Component {
                   </a>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </section>
         )}
       </>

@@ -29,6 +29,11 @@ import DetailSpecialty from "./Patient/Specialty/DetailSpecialty";
 import DetailClinic from "./Patient/Clinic/DetailClinic";
 import PageAddNewAccount from "./System/PageAddNewAccount";
 import ManageSchedule from "./System/Doctor/ManageSchedule";
+import HomeListClinic from "./Patient/Clinic/HomeListClinic";
+import HomeListDoctor from "./Patient/Doctor/HomeListDoctor";
+import HomeListSpecialty from "./Patient/Specialty/HomeListSpecialty";
+import DetailPost from "./Patient/Post/DetailPost";
+import HomeListPost from "./Patient/Post/HomeListPost";
 class App extends Component {
   handlePersistorState = () => {
     const { persistor } = this.props;
@@ -81,12 +86,26 @@ class App extends Component {
                   /> */}
                   <Route path={path.HOMEPAGE} component={HomePage} />
                   <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                  <Route path={path.DETAIL_POST} component={DetailPost} />
                   <Route
                     path={path.DETAIL_SPECIALTY}
                     component={DetailSpecialty}
                   />
                   <Route path={path.DETAIL_CLINIC} component={DetailClinic} />
                   <Route path={path.VERIFY_EMAIL} component={VerifyEmail} />
+                  <Route
+                    path={path.HOME_LIST_CLINIC}
+                    component={HomeListClinic}
+                  />
+                  <Route
+                    path={path.HOME_LIST_DOCTOR}
+                    component={HomeListDoctor}
+                  />
+                  <Route
+                    path={path.HOME_LIST_SPECIALTY}
+                    component={HomeListSpecialty}
+                  />
+                  <Route path={path.HOME_LIST_POST} component={HomeListPost} />
                 </Switch>
               </CustomScrollbars>
             </div>

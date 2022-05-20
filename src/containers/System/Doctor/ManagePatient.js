@@ -22,6 +22,7 @@ class ManagePatient extends Component {
       isShowRemedyModal: false,
       dataModal: "",
       isLoading: false,
+      isDisabled: false,
     };
   }
   async componentDidMount() {
@@ -35,13 +36,15 @@ class ManagePatient extends Component {
       doctorId: user.id,
       date: formatDate,
     });
+    console.log("ress", res);
     if (res && res.errCode === 0) {
       this.setState({
         dataPatient: res.data,
       });
     }
   };
-  handleChangeDatePicker = (date) => {
+  handleChangeDatePicker = async (date) => {
+    await this.getDataPatient();
     this.setState(
       {
         currentDate: date[0],

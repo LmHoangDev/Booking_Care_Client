@@ -273,22 +273,20 @@ class ManageDoctor extends Component {
       note: this.state.note,
     });
     this.setState({
-      contentHTML: "",
-      contentMarkdown: "",
-      selectedOption: null,
-      description: "",
-      hasOldData: false,
-
+      // contentHTML: "",
+      // contentMarkdown: "",
+      // selectedOption: null,
+      // description: "",
+      // hasOldData: false,
       //save doctor_infor_table
-
-      selectedPrice: "",
-      selectedPayment: "",
-      selectedProvince: "",
-      selectedSpecialty: "",
-      selectedClinic: "",
-      nameClinic: "",
-      addressClinic: "",
-      note: "",
+      // selectedPrice: "",
+      // selectedPayment: "",
+      // selectedProvince: "",
+      // selectedSpecialty: "",
+      // selectedClinic: "",
+      // nameClinic: "",
+      // addressClinic: "",
+      // note: "",
     });
   };
   render() {

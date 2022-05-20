@@ -46,7 +46,10 @@ class MedicalFacility extends Component {
               <h1>
                 <FormattedMessage id="homepage.outstanding-medical-facility" />
               </h1>
-              <div className="see-more">
+              <div
+                className="see-more"
+                onClick={() => this.props.history.push("/home-list-clinic")}
+              >
                 <a href="#">
                   {" "}
                   <FormattedMessage id="homepage.search" />
@@ -61,6 +64,7 @@ class MedicalFacility extends Component {
                     <div
                       className="section-item"
                       onClick={() => this.handleViewDetailClinic(item)}
+                      key={index}
                     >
                       <a href="#" className="d-block">
                         <img src={item.image} alt="" />

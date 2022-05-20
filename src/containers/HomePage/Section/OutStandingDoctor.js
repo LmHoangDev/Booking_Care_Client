@@ -51,7 +51,10 @@ class OutStandingDoctor extends Component {
               <h1>
                 <FormattedMessage id="homepage.outstanding-doctor" />
               </h1>
-              <div className="see-more">
+              <div
+                className="see-more"
+                onClick={() => this.props.history.push("/home-list-doctor")}
+              >
                 <a href="#">
                   {" "}
                   <FormattedMessage id="homepage.search" />
@@ -81,7 +84,6 @@ class OutStandingDoctor extends Component {
                       <a href="#">
                         <img src={imageBase64} alt="" />
                         <h3>{language === languages.VI ? nameVi : nameEn}</h3>
-                        <p>Bệnh viện thanh nhàn</p>
                       </a>
                     </div>
                   );

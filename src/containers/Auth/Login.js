@@ -7,6 +7,7 @@ import "./Login.scss";
 import { FormattedMessage } from "react-intl";
 
 import { handleLoginApi } from "../../services/userService";
+import { withRouter } from "react-router";
 
 class Login extends Component {
   constructor(props) {
@@ -45,6 +46,7 @@ class Login extends Component {
       if (result && result.errCode === 0) {
         this.props.userLoginSuccess(result.user);
         console.log("Login success");
+        this.props.history.push("/system/home-manage");
       }
       console.log(result);
     } catch (error) {
@@ -152,4 +154,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

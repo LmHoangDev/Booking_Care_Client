@@ -11,29 +11,26 @@ import {
 } from "../../../services/userService";
 import * as actions from "../../../store/actions";
 import { languages } from "../../../utils";
-class ManageSchedule extends Component {
+class ManageScheduleOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrDoctors: [],
       arrTimes: [],
-      selectedOption: {},
       currentDate: "",
-      dataTimes: [],
+      doctorId: "",
+      dataState: [],
     };
   }
   componentDidMount() {
-    this.props.fetchAllDoctorsRedux();
     this.props.fetchAllTimeScheduleStartRedux();
+    if (this.props.userInfo.id) {
+      this.setState({
+        doctorId: this.props.userInfo.id,
+      });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.listDoctors !== this.props.listDoctors) {
-      let dataSelect = this.buildDataInput(this.props.listDoctors);
-      this.setState({
-        arrDoctors: dataSelect,
-      });
-    }
     if (prevProps.listTime !== this.props.listTime) {
       let data = this.props.listTime;
       let copyData = data.map((item, index) => {
@@ -41,12 +38,6 @@ class ManageSchedule extends Component {
       });
       this.setState({
         arrTimes: copyData,
-      });
-    }
-    if (prevProps.language !== this.props.language) {
-      let dataSelect = this.buildDataInput(this.props.listDoctors);
-      this.setState({
-        arrDoctors: dataSelect,
       });
     }
   }
@@ -65,19 +56,20 @@ class ManageSchedule extends Component {
     }
     return result;
   };
-  handleChange = async (selectedOption) => {
-    this.setState({ selectedOption });
-  };
+
   handleChangeDatePicker = async (date) => {
     this.setState({
       currentDate: date[0],
+      //   dataState: [],
     });
     let formatDate = new Date(date[0]).getTime();
+    // let formatDate = new Date(this.state.currentDate).getTime();
     try {
       let res = await getScheduleDoctorByDateService(
-        this.state.selectedOption.value,
+        this.state.doctorId,
         formatDate
       );
+
       // console.log("res-shedule-bydate", res.data);
       if (res && res.errCode === 0 && res.data.length > 0) {
         let arrTimesByDoctor = res.data.map((item, index) => {
@@ -85,7 +77,7 @@ class ManageSchedule extends Component {
         });
         console.log("arrTimesByDoctor", arrTimesByDoctor);
         this.setState({
-          dataTimes: arrTimesByDoctor,
+          dataState: arrTimesByDoctor,
         });
         let dataz = this.props.listTime;
         let copyData = dataz.map((item, index) => {
@@ -96,7 +88,7 @@ class ManageSchedule extends Component {
         });
         // console.log("arrSelect", arrTimesByDoctor);
         let data = this.state.arrTimes;
-        let data1 = this.state.dataTimes;
+        let data1 = this.state.dataState;
         console.log("data1", data1);
         console.log("data", data);
         let dataCopy = data.map((item, index) => {
@@ -107,7 +99,7 @@ class ManageSchedule extends Component {
         });
         this.setState({
           arrTimes: dataCopy,
-          dataTimes: [],
+          dataState: [],
         });
       } else {
         let data = this.props.listTime;
@@ -116,7 +108,7 @@ class ManageSchedule extends Component {
         });
         this.setState({
           arrTimes: copyData,
-          dataTimes: [],
+          dataState: [],
         });
       }
     } catch (error) {
@@ -138,13 +130,9 @@ class ManageSchedule extends Component {
   };
 
   handleSaveInfor = async () => {
-    let { arrTimes, selectedOption, currentDate } = this.state;
+    let { arrTimes, doctorId, currentDate } = this.state;
     let result = [];
 
-    if (_.isEmpty(selectedOption)) {
-      toast.error("Invalid selected doctor !");
-      return;
-    }
     if (!currentDate) {
       toast.error("Invalid date !");
       return;
@@ -158,7 +146,7 @@ class ManageSchedule extends Component {
       if (filterTimes && filterTimes.length > 0) {
         filterTimes.map((schedule, index) => {
           let object = {};
-          object.doctorId = selectedOption.value;
+          object.doctorId = doctorId;
           object.date = formatDate;
           object.timeType = schedule.keyMap;
           result.push(object);
@@ -172,7 +160,7 @@ class ManageSchedule extends Component {
       try {
         let res = await saveBulkCreateSchedule({
           arrSchedule: result,
-          doctorId: selectedOption.value,
+          doctorId: doctorId,
           formatDate: formatDate,
         });
         if (res && res.errCode === 0) {
@@ -213,17 +201,6 @@ class ManageSchedule extends Component {
             <FormattedMessage id="manage-schedule.title" />
           </h2>
           <div className="row mt-4">
-            <div className="col-6 form-group">
-              <label htmlFor="choose-doctor">
-                <FormattedMessage id="manage-schedule.choose-doctor" />
-              </label>
-              <Select
-                value={this.state.selectedOption}
-                onChange={this.handleChange}
-                options={this.state.arrDoctors}
-                id="doctor"
-              />
-            </div>
             <div className="col-6 form-group">
               <label htmlFor="choose-date">
                 {" "}
@@ -274,9 +251,10 @@ class ManageSchedule extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoggedIn: state.user.isLoggedIn,
-    listDoctors: state.admin.doctors,
+
     language: state.app.language,
     listTime: state.admin.allDataTime,
+    userInfo: state.user.userInfo,
   };
 };
 
@@ -288,4 +266,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageSchedule);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageScheduleOne);

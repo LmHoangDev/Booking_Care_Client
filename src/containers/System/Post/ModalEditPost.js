@@ -32,19 +32,6 @@ class ModalEditPost extends Component {
     };
   }
   async componentDidMount() {
-    try {
-      let resPost = await getAllCodeService("POST");
-      // console.log("res", res, resProvince);
-      if (resPost && resPost.errCode === 0) {
-        this.setState({ listPostType: resPost.data });
-      } else {
-        this.setState({
-          listPostType: [],
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
     if (this.props.dataFormParent) {
       let data = this.props.dataFormParent;
       //   this.setState({
@@ -60,6 +47,19 @@ class ModalEditPost extends Component {
         id: data.id,
         type: data.type,
       });
+    }
+    try {
+      let resPost = await getAllCodeService("POST");
+      // console.log("res", res, resProvince);
+      if (resPost && resPost.errCode === 0) {
+        this.setState({ listPostType: resPost.data });
+      } else {
+        this.setState({
+          listPostType: [],
+        });
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
   handleChangeImage = async (e) => {
@@ -98,18 +98,10 @@ class ModalEditPost extends Component {
       // dispatch(fetchGenderStart());
       let data = this.state;
       await this.props.fetchUpdatePost(data);
+      this.toggle();
     } catch (error) {
       console.log(error);
     }
-    this.toggle();
-    this.setState({
-      descriptionHTML: "",
-      descriptionMarkdown: "",
-      title: "",
-
-      image: "",
-      id: "",
-    });
   };
   handleEditorChange = ({ html, text }) => {
     this.setState({
@@ -119,6 +111,14 @@ class ModalEditPost extends Component {
   };
   toggle = () => {
     this.props.toggleModal();
+    this.setState({
+      descriptionHTML: "",
+      descriptionMarkdown: "",
+      title: "",
+
+      image: "",
+      id: "",
+    });
   };
   handleChangeText = (e, id) => {
     let stateCopy = { ...this.state };

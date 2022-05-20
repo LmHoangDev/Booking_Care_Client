@@ -16,6 +16,7 @@ import HomeManage from "../containers/System/HomeManage";
 import ChangePassword from "../containers/Auth/ChangePassword";
 import ChangeInforPersonal from "../containers/Auth/ChangeInforPersonal";
 import "./FooterAdmin.scss";
+import ManageSchedule from "../containers/System/Doctor/ManageSchedule";
 class System extends Component {
   constructor(props) {
     super(props);
@@ -76,7 +77,10 @@ class System extends Component {
               <Route path="/system/post-list" component={PostManage} />
               <Route path="/system/home-manage" component={HomeManage} />
               <Route path="/system/create-post" component={PageAddPost} />
-
+              <Route
+                path="/system/manage-schedule"
+                component={ManageSchedule}
+              />
               <Route path="/system/create-clinic" component={ManageClinic} />
               <Route path="/system/clinic-list" component={ListClinic} />
               {/* <Route path="/system/handbook-manage" component={PostManage} /> */}
